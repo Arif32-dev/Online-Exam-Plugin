@@ -1,0 +1,133 @@
+@import './package/variables.scss';
+
+.worko-tabs {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+
+        .user-status {
+            padding: 3px 6px;
+            color: black;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+        }
+
+        .user_active {
+            background-color: $btn_green;
+        }
+
+        .user_inactive {
+            background-color: $btn_red;
+            color: white;
+        }
+
+        .oe-yellow {
+            background-color: $btn_orange;
+            color: black;
+            font-weight: bold;
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .ow-yellow-active {
+            opacity: 1;
+            background-color: $btn_green;
+            cursor: pointer;
+            padding: 2px 4px;
+            letter-spacing: 1px;
+        }
+
+        .exam_status {
+            padding: 3px 6px;
+            background-color: $btn_orange;
+            color: black;
+            border-radius: 6px;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            -ms-border-radius: 6px;
+            -o-border-radius: 6px;
+        }
+    }
+
+    th {
+        font-size: 15px;
+        background-color: $primary_color;
+        color: white;
+    }
+
+    td {
+        font-weight: 600;
+        letter-spacing: 1px;
+
+        .oe-folder {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .oe-folder-icon {
+                font-size: 25px;
+                margin: 0 10px;
+                color: $btn_orange;
+
+                &:hover {
+                    color: $primary_color;
+                }
+
+                cursor: pointer;
+                transition: 0.5s ease-in-out;
+                -webkit-transition: 0.5s ease-in-out;
+                -moz-transition: 0.5s ease-in-out;
+                -ms-transition: 0.5s ease-in-out;
+                -o-transition: 0.5s ease-in-out;
+            }
+        }
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 8px 20px;
+    }
+
+    td {
+        padding-bottom: 15px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    button {
+        border: 1px solid #6c7ae0;
+        cursor: pointer;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+
+        &:hover {
+            border: 1px solid black;
+        }
+    }
+
+
+    .oe-green {
+        background-color: $btn_green;
+        color: black;
+        padding: 3px 5px;
+        letter-spacing: 1px;
+    }
+
+    .oe-red {
+        background-color: $btn_red;
+        color: white;
+        padding: 3px 5px;
+        letter-spacing: 1px;
+    }
+}

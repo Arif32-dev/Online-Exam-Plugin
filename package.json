@@ -1,0 +1,31 @@
+{
+    "name": "online-exam",
+    "version": "1.0.0",
+    "description": "this is a plugin for online-exam theme",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "author": "Arifur Rahman Arif",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.10.3",
+        "@babel/preset-env": "^7.10.3",
+        "babel-loader": "^8.1.0",
+        "browser-sync": "^2.26.7",
+        "browser-sync-webpack-plugin": "^2.2.2",
+        "file-loader": "^6.0.0",
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^4.1.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "node-sass": "^4.14.1",
+        "sass-loader": "^8.0.2",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.12"
+    },
+    "dependencies": {
+        "jquery": "^3.5.1"
+    }
+}
