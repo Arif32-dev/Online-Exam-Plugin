@@ -10,8 +10,9 @@ class Scripts_styles
     }
     public function enqueue_scirpts_styles()
     {
-        wp_enqueue_style('tab_style', BASE_URL . 'public/assets/css/tab.min.css');
-        wp_enqueue_style('table_style', BASE_URL . 'public/assets/css/table.min.css');
+        wp_enqueue_style('ow-tab_style', BASE_URL . 'public/assets/css/tab.min.css');
+        wp_enqueue_style('ow-table_style', BASE_URL . 'public/assets/css/table.min.css');
+        wp_enqueue_style('ow-qustion', BASE_URL . 'public/assets/css/qustion.min.css');
         wp_enqueue_script('ow_admin_scirpt', BASE_URL . 'public/assets/scripts/admin.min.js', 'jquery', '1.0.0', true);
         wp_enqueue_script('ow_admin_fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js', '', '', true);
         wp_localize_script('ow_admin_scirpt', 'file_url', [
