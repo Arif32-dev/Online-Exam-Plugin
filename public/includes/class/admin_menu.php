@@ -100,23 +100,24 @@ class Admin_menu
          * adding all the create all question page according to question folder
          * this is question creation page
          */
-
-        add_submenu_page(
-            // parant slug
-            'online_exam',
-            // page title
-            "Create Qustion",
-            // menu title
-            "Create Qustion",
-            // capability
-            'create_question',
-            // menu slug
-            'create_question',
-            // callback function
-            function () {
-                Callback::submenu_create_qus();
-            },
-        );
+        if (isset($_GET['exam_folder_id'])) {
+            add_submenu_page(
+                // parant slug
+                'online_exam',
+                // page title
+                "Create Qustion",
+                // menu title
+                "Create Qustion",
+                // capability
+                'create_question',
+                // menu slug
+                'create_question',
+                // callback function
+                function () {
+                    Callback::submenu_create_qus();
+                },
+            );
+        }
 
         /**
          * renaming online exam menu

@@ -7,6 +7,8 @@
     position: relative;
     display: grid;
     grid-gap: 10px;
+    height: 75vh;
+    overflow-y: scroll;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 
     .main-qus-container {

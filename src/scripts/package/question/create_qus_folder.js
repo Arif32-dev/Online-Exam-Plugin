@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    class OE_Create_qus {
+    class OE_Create_qus_folder {
         constructor() {
             this.form = $('#question_create_form');
             this.events();
@@ -40,5 +40,5 @@ jQuery(document).ready(function($) {
             })
         }
     }
-    new OE_Create_qus();
+    new OE_Create_qus_folder();
 })

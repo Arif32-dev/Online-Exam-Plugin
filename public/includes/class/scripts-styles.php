@@ -22,6 +22,7 @@ class Scripts_styles
             'ud_teacher_url' => BASE_URL . 'public/includes/backend/teacher/ud_teacher.php',
             'create_question_url' => BASE_URL . 'public/includes/backend/question/create_question.php',
             'ud_question_url' => BASE_URL . 'public/includes/backend/question/ud_question.php',
+            'single_qus_url' => BASE_URL . 'public/includes/backend/question/single_qustion.php',
         ]);
     }
 }
