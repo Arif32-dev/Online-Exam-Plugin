@@ -72,10 +72,21 @@ class Create_teacher
             ]
         );
         if ($res) {
+            $this->create_teacher_post();
             echo 'success';
         } else {
             echo 'failed';
         }
+    }
+    private function create_teacher_post()
+    {
+        wp_insert_post([
+            'import_id' => $this->user_id,
+            'post_title' => sanitize_text_field($this->post_data['teacher_name']),
+            'post_type' => 'teacher',
+            'post_status' => 'publish',
+            'post_content' => "",
+        ], true);
     }
 }
 new Create_teacher();

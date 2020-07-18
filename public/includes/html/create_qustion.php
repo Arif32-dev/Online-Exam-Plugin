@@ -16,7 +16,6 @@ class OE_qustion
             $this->table = $wpdb->prefix . 'question_folder';
             $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . get_option('exam_folder_id') . "");
             echo "<h2>Qustion_folder : " . $this->qus_data[0]->exam_folder_name . "</h2>";
-
             ?>
         <div  class="oe-notification">
         </div>

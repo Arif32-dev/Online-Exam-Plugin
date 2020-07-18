@@ -81,6 +81,8 @@ class OE_Initializer
         require_once BASE_PATH . 'public/includes/class/register_settings.php';
         require_once BASE_PATH . 'public/includes/class/delete_user_role.php';
         require_once BASE_PATH . 'public/includes/class/update_user_role.php';
+        require_once BASE_PATH . 'public/includes/class/teacher-post.php';
+
     }
     /**
      * Add plugin action links.

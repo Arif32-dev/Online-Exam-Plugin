@@ -8,6 +8,7 @@ class OE_Delete_user
     public function handle_delete($user_id)
     {
         self::teacher_delete($user_id);
+        self::delete_post($user_id);
         self::delete_qustion_folder($user_id);
     }
     public static function delete_qustion_folder($user_id)
@@ -29,7 +30,7 @@ class OE_Delete_user
             return;
         }
     }
-    public function teacher_delete($user_id)
+    public static function teacher_delete($user_id)
     {
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
@@ -47,6 +48,10 @@ class OE_Delete_user
             return;
         }
 
+    }
+    public static function delete_post($user_id)
+    {
+        wp_delete_post($user_id, true);
     }
 }
 new OE_Delete_user();
