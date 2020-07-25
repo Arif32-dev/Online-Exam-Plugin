@@ -23,6 +23,8 @@ class Scripts_styles
             'create_question_url' => BASE_URL . 'public/includes/backend/question/create_question.php',
             'ud_question_url' => BASE_URL . 'public/includes/backend/question/ud_question.php',
             'single_qus_url' => BASE_URL . 'public/includes/backend/question/single_qustion.php',
+            'exam_routine_url' => BASE_URL . 'public/includes/backend/routine/create_routine.php',
+            'ud_routine_url' => BASE_URL . 'public/includes/backend/routine/ud_routine.php',
         ]);
     }
 }

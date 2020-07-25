@@ -20,7 +20,7 @@ class UD_Question
                     return;
                 }
                 if (!$this->post_data['exam_folder_name'] || !$this->post_data['exam_folder_id'] || !$this->post_data['quantity'] || !$this->post_data['exam_time'] || !$this->post_data['pass_percentage']) {
-                    echo 'empty_question_field';
+                    echo 'empty_field';
                     return;
                 }
                 $this->handle_action_update();

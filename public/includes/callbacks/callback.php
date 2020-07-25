@@ -38,4 +38,8 @@ class Callback
     {
         require_once BASE_PATH . 'public/includes/html/create_qustion.php';
     }
+    public static function submenu_routine()
+    {
+        require_once BASE_PATH . 'public/includes/html/exam-routine.php';
+    }
 }

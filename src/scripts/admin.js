@@ -5,3 +5,5 @@ import './package/teachers/ud_teacher';
 import './package/question/create_qus_folder';
 import './package/question/ud_question';
 import './package/question/create_qustion';
+import './package/routine/create_routine';
+import './package/routine/ud_routine';

@@ -27,7 +27,6 @@ class Admin_menu
                 Callback::add_admin_menu();
             },
             'dashicons-text-page',
-            99
         );
 
         /**
@@ -71,6 +70,28 @@ class Admin_menu
             // callback function
             function () {
                 Callback::submenu_questions();
+            },
+        );
+
+        /**
+         * adding all the submens to admin page
+         * this is all questions managing page
+         */
+
+        add_submenu_page(
+            // parant slug
+            'online_exam',
+            // page title
+            "Exam Routine",
+            // menu title
+            "Exam Routine",
+            // capability
+            'manage_routine',
+            // menu slug
+            'manage_routine',
+            // callback function
+            function () {
+                Callback::submenu_routine();
             },
         );
 

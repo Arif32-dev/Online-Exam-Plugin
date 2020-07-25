@@ -14,10 +14,14 @@ class Admin_Base {
         })
     }
     status_check(e, $, res, ajax_action) {
-        console.log(res)
         if (ajax_action == 'ud_department') {
             this.common_msg(e, res, $);
         }
+
+        if (ajax_action == 'ud_routine') {
+            this.common_msg(e, res, $)
+        }
+
 
         if (ajax_action == 'ud_teacher') {
             if (res == 'updated' || res == 'allowed') {
@@ -61,8 +65,8 @@ class Admin_Base {
                 let text = 'Please select a department';
                 this.output('error', text, $);
             }
-            if (res == 'empty_question_field') {
-                let text = 'One or more question field is empty';
+            if (res == 'empty_field') {
+                let text = 'One or more field is empty';
                 this.output('warning', text, $);
             }
             if (res == 'published') {

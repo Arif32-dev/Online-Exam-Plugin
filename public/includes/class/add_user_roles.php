@@ -39,6 +39,7 @@ class OE_User_role
         $this->user_role->add_cap('manage_questions', true);
         $this->user_role->add_cap('manage_students', true);
         $this->user_role->add_cap('create_question', true);
+        $this->user_role->add_cap('manage_routine', true);
 
         /**
          * giving permission for this plugin to admin
@@ -50,6 +51,7 @@ class OE_User_role
         $this->user_role->add_cap('manage_teachers', true);
         $this->user_role->add_cap('manage_department', true);
         $this->user_role->add_cap('create_question', true);
+        $this->user_role->add_cap('manage_routine', true);
 
     }
 }

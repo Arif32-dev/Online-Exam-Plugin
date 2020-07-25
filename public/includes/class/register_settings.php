@@ -32,6 +32,13 @@ class Settings_api
         register_setting('ow-question', 'est_time');
         register_setting('ow-question', 'pass_percentage');
 
+        /**
+         * registering exam routine and fields for Assign Teacher  tab
+         */
+        register_setting('ow-exam-routine', 'department');
+        register_setting('ow-exam-routine', 'exam_name');
+        register_setting('ow-exam-routine', 'exam_date');
+
         $this->settings_section();
         $this->settings_fields();
     }
@@ -54,6 +61,12 @@ class Settings_api
             '',
             "",
             'manage_questions'
+        );
+        add_settings_section(
+            'routine_section',
+            '',
+            "",
+            'manage_routine'
         );
     }
 
@@ -79,6 +92,13 @@ class Settings_api
             [$this, 'question_field'],
             'manage_questions',
             'question_section',
+        );
+        add_settings_field(
+            'routine_field',
+            '',
+            [$this, 'routine_field'],
+            'manage_routine',
+            'routine_section',
         );
     }
 
@@ -200,6 +220,36 @@ class Settings_api
             <?php
 
     }
+    public function routine_field()
+    {
+
+        ?>
+        <div class="s_fields">
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">Choose Department:</label>
+                    </strong>
+                    <?php $this->user_data()?>
+            </div>
+               <br>
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">For Exam :</label>
+                    </strong>
+                    <input type="text" name="exam_name" required placeholder="Upcoming exam name">
+            </div>
+               <br>
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">Choose Date:</label>
+                    </strong>
+                    <input type="date" name="exam_date" required>
+            </div>
+        </div>
+        <?php
+
+    }
+
     public function select_options()
     {
         $select_options = '';
@@ -223,7 +273,7 @@ class Settings_api
             $this->dept_data = $wpdb->get_results("SELECT dept_name, dept_id FROM " . $table . " WHERE dept_id=" . $teacher_dept[0]->teacher_dept . "");
 
             ?>
-                <select required form="question_create_form" style="width: 9rem" name="dept_id">
+                <select required style="width: 9rem" name="dept_id">
                     <option value="<?php echo $this->dept_data[0]->dept_id; ?>" selected><?php echo $this->dept_data[0]->dept_name; ?></option>
                 </select>
              <?php
@@ -231,7 +281,7 @@ class Settings_api
         } elseif (get_userdata(get_current_user_id())->roles[0] == 'administrator') {
 
             ?>
-                <select name="dept_id" form="question_create_form" required>
+                <select name="dept_id"  required>
                     <option  selected  disabled hidden>Select Department</option>
                     <?php echo $this->select_options(); ?>
                 </select>

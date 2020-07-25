@@ -31,6 +31,10 @@ class Create_tables
         $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `std_id` TEXT NOT NULL , `std_name` TEXT NOT NULL , `dept_id` INT(255) NOT NULL , `std_phone` TEXT NOT NULL , `std_email` TEXT NOT NULL , `std_password` TEXT NOT NULL , `std_user_name` TEXT NOT NULL , `std_reg_date` INT(255) NOT NULL , `status` BOOLEAN NOT NULL , `restriction` BOOLEAN NOT NULL , `restrict_date` INT(255) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
         $this->create_tables();
 
+        $table = $wpdb->prefix . 'exam_routine';
+        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT NOT NULL AUTO_INCREMENT , `dept_id` INT(255) NOT NULL , `user_id` INT(255) NOT NULL,  `exam_name` TEXT NOT NULL , `exam_date` DATE NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
+        $this->create_tables();
+
     }
     public function create_tables()
     {
