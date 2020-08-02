@@ -6,13 +6,10 @@ settings_errors();
 <?php
 class Department extends Base_tab
 {
-    private $dept_data;
     public function __construct()
     {
         parent::__construct('Department Details', 'Create Department');
-        global $wpdb;
-        $table = $wpdb->prefix . 'department';
-        $this->dept_data = $wpdb->get_results("SELECT * FROM " . $table . "");
+
         $this->tab_body();
     }
     public function tab_panel1()

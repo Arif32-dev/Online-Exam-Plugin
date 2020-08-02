@@ -16,7 +16,7 @@ class Base_tab
 
         global $wpdb;
         $this->table = $wpdb->prefix . 'department';
-        $this->dept_data = $wpdb->get_results("SELECT dept_name, dept_id FROM " . $this->table . "");
+        $this->dept_data = $wpdb->get_results("SELECT * FROM " . $this->table . "");
 
     }
     public function tab_body()

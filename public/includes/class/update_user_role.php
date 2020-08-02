@@ -9,29 +9,33 @@ class OE_Update_user
     {
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
-        $res = $wpdb->get_results("SELECT teacher_email FROM " . $table . " WHERE teacher_id=" . $user_id . "");
+        $res = $wpdb->get_results("SELECT teacher_email, teacher_name FROM " . $table . " WHERE teacher_id=" . $user_id . "");
         if (!$res) {
             return;
         }
         if (get_userdata($user_id)->roles[0] == 'teacher' || get_userdata($user_id)->roles[0] == 'administrator') {
+            // if user role is changed to either a teacher or admin then the database will be updated accordingly
             self::user_update($res, $table, $user_id, false, true, 0);
         } else {
+            // if user is changed to any other role except teacher and admin then the user user will be restricted
             self::user_update($res, $table, $user_id, true, 0, time());
         }
     }
     private static function user_update($res, $table, $user_id, $restriction, $status, $restrict_date)
     {
         global $wpdb;
-        if ($res->teacher_email != get_userdata($user_id)->user_email) {
+        if (($res[0]->teacher_email != get_userdata($user_id)->data->user_email) || ($res[0]->teacher_name != get_userdata($user_id)->data->display_name)) {
             $wpdb->update(
                 $table,
                 [
-                    'teacher_email' => ' ' . get_userdata($user_id)->user_email . ' ',
+                    'teacher_email' => ' ' . get_userdata($user_id)->data->user_email . ' ',
+                    'teacher_name' => ' ' . get_userdata($user_id)->data->display_name . ' ',
                 ],
                 [
                     'teacher_id' => $user_id,
                 ],
                 [
+                    '%s',
                     '%s',
                 ],
                 [

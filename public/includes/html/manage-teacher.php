@@ -4,17 +4,13 @@
 class Teahers extends Base_tab
 {
     private $teacher_data;
-    private $dept_data;
-    private $dept_id;
+
     public function __construct()
     {
         parent::__construct("Teacher's Details", "Assign Teacher");
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
         $this->teacher_data = $wpdb->get_results("SELECT * FROM " . $table . "");
-
-        $table = $wpdb->prefix . 'department';
-        $this->dept_data = $wpdb->get_results("SELECT dept_name, dept_id FROM " . $table . "");
 
         $this->tab_body();
     }
@@ -117,20 +113,7 @@ class Teahers extends Base_tab
 
                 ?>
                     <option  selected  disabled hidden>Select Department</option>
-                    <?php $this->select_options()?>
-                <?php
-
-            }
-        }
-    }
-    public function select_options()
-    {
-
-        if ($this->dept_data) {
-            foreach ($this->dept_data as $data) {
-
-                ?>
-                <option value="<?php echo $data->dept_id; ?>"><?php echo $data->dept_name; ?></option>
+                    <?php $this->no_data_options()?>
                 <?php
 
             }
