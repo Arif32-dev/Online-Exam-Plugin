@@ -68,13 +68,13 @@ class Teahers extends Base_tab
                 ?>
                 <tr>
                         <td><?php echo $teacher->teacher_id ?></td>
-                        <td><input type="text" name="teacher_name" value="<?php echo $teacher->teacher_name ?>"></td>
+                        <td><input type="text" name="teacher_name" value="<?php echo trim($teacher->teacher_name) ?>"></td>
                         <td>
                             <select style="width: 10rem" class="teacher_dept">
                                     <?php $this->dept_select_box($teacher->teacher_dept);?>
                             </select>
                         </td>
-                        <td><input type="text" name="teacher_phn" value="<?php echo $teacher->teacher_phn ?>"></td>
+                        <td><input type="text" name="teacher_phn" value="<?php echo trim($teacher->teacher_phn) ?>"></td>
                         <td><?php echo $teacher->teacher_email ?></td>
                         <td><?php echo date("Y-m-d   h:i:sa", $teacher->appoint_date) ?></td>
                         <td><?php echo $teacher->status == 1 ? "<span class='user-status user_active'>Active</span>" : "<span class='user-status user_inactive'>Inactive</span>" ?></td>
@@ -86,35 +86,6 @@ class Teahers extends Base_tab
                         <td><button data-teacher-id="<?php echo $teacher->teacher_id ?>" data-action="delete-teacher"  class="oe-teacher-delete oe-red">Delete</button></td>
                 </tr>
             <?php
-
-            }
-        }
-    }
-
-    public function dept_select_box($teacher_dept_id)
-    {
-        global $wpdb;
-        if ($this->dept_data) {
-            $table = $wpdb->prefix . 'department';
-            $this->dept_id = $wpdb->get_results("SELECT dept_name, dept_id FROM " . $table . " WHERE dept_id=" . $teacher_dept_id . "");
-            if ($this->dept_id) {
-
-                foreach ($this->dept_data as $data) {
-
-                    ?>
-                        <option
-                            value="<?php echo $data->dept_id; ?> " <?php echo $data->dept_id == $teacher_dept_id ? "selected" : ""; ?> >
-                            <?php echo $data->dept_name; ?>
-                        </option>
-                     <?php
-
-                }
-            } else {
-
-                ?>
-                    <option  selected  disabled hidden>Select Department</option>
-                    <?php $this->no_data_options()?>
-                <?php
 
             }
         }

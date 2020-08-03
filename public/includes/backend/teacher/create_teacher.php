@@ -7,11 +7,15 @@ class Create_teacher
     public function __construct()
     {
         $this->post_data = $_POST;
+        /* if post data is empty then dont execute below code */
         if (!$this->post_data) {
             return;
         }
+        /* if Department id is set */
         if (isset($this->post_data['teacher_dept'])) {
+            // if phn number dosn't contain any other character then number
             if (is_numeric($this->post_data['teacher_phn'])) {
+                // if teacher role is exists then create teacher
                 if (get_role('teacher')) {
                     $this->create_teacher();
                 } else {
@@ -26,6 +30,7 @@ class Create_teacher
     }
     private function create_teacher()
     {
+        /* insert user into wordpress database */
         $user_id = wp_insert_user([
             'user_pass' => sanitize_text_field($this->post_data['teacher_pass']),
             'user_login' => sanitize_text_field($this->post_data['teacher_username']),
@@ -36,6 +41,7 @@ class Create_teacher
             'syntax_highlighting' => false,
             'role' => 'teacher',
         ]);
+        /* if user is created successfully then create teacher into wordpress custom wp_teacher database */
         if (is_int($user_id)) {
             $this->user_id = intval($user_id);
             $this->insert_data();
@@ -45,6 +51,7 @@ class Create_teacher
     }
     private function insert_data()
     {
+        /* create teacher into wp_teacher database */
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
         $res = $wpdb->insert($table,
@@ -72,6 +79,8 @@ class Create_teacher
             ]
         );
         if ($res) {
+            /* if teacher is created to wp_teacher database
+            then create a teacher cpt post to wordrpesss database  with the teacher id as custom id */
             $this->create_teacher_post();
             echo 'success';
         } else {
@@ -80,6 +89,7 @@ class Create_teacher
     }
     private function create_teacher_post()
     {
+        /* Create a cpt teacher post with newly created user id */
         wp_insert_post([
             'import_id' => $this->user_id,
             'post_title' => sanitize_text_field($this->post_data['teacher_name']),

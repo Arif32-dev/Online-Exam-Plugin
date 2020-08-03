@@ -1,46 +1,80 @@
 <?php
 class OE_User_role
 {
+    /**
+     * @param object $permission
+     */
     private $user_role;
+
+    /**
+     * @param array $permission
+     */
+    private $permission;
     public function __construct()
     {
-        $this->add_teacher_role();
+        $this->set_permisson();
+        $this->set_new_role();
+        $this->set_admin_role();
     }
-    public function add_teacher_role()
+    public function set_permisson()
     {
-        add_role('teacher', 'Teacher');
+        $this->permission = [
+            [
 
-        /**
-         * giving permission for this plugin to teacher
-         */
+                'role' => 'teacher',
+                'Role' => 'Teacher',
+                'true_cap' => true,
+                'false_cap' => false,
+            ],
+            [
 
-        $this->user_role = get_role('teacher');
-        $this->user_role->add_cap('update_plugins', false);
-        $this->user_role->add_cap('upload_files', false);
-        $this->user_role->add_cap('add_users', false);
-        $this->user_role->add_cap('delete_users', false);
-        $this->user_role->add_cap('edit_themes', false);
-        $this->user_role->add_cap('read', true);
-        $this->user_role->add_cap('update_plugins', false);
-        $this->user_role->add_cap('switch_themes', false);
-        $this->user_role->add_cap('promote_users', false);
-        $this->user_role->add_cap('edit_pages', false);
-        $this->user_role->add_cap('edit_posts', false);
-        $this->user_role->add_cap('edit_plugins', true);
-        $this->user_role->add_cap('edit_users', true);
-        $this->user_role->add_cap('list_users', false);
-        $this->user_role->add_cap('customize', false);
-        $this->user_role->add_cap('manage_options', false);
-        $this->user_role->add_cap('edit_theme_options', false);
-        $this->user_role->add_cap('edit_pages', false);
-        $this->user_role->add_cap('activate_plugins', false);
-        $this->user_role->add_cap('update_core', false);
-        $this->user_role->add_cap('update_themes', false);
-        $this->user_role->add_cap('manage_questions', true);
-        $this->user_role->add_cap('manage_students', true);
-        $this->user_role->add_cap('create_question', true);
-        $this->user_role->add_cap('manage_routine', true);
+                'role' => 'student',
+                'Role' => 'Student',
+                'true_cap' => false,
+                'false_cap' => false,
+            ],
+        ];
+    }
+    public function set_new_role()
+    {
+        foreach ($this->permission as $permission) {
+            /* Adding role */
+            add_role($permission['role'], $permission['Role']);
 
+            /* giving permission for this plugin to teacher */
+
+            $this->user_role = get_role($permission['role']);
+
+            $this->user_role->add_cap('update_plugins', $permission['false_cap']);
+            $this->user_role->add_cap('upload_files', $permission['false_cap']);
+            $this->user_role->add_cap('add_users', $permission['false_cap']);
+            $this->user_role->add_cap('delete_users', $permission['false_cap']);
+            $this->user_role->add_cap('edit_themes', $permission['false_cap']);
+            $this->user_role->add_cap('read', $permission['true_cap']);
+            $this->user_role->add_cap('update_plugins', $permission['false_cap']);
+            $this->user_role->add_cap('switch_themes', $permission['false_cap']);
+            $this->user_role->add_cap('promote_users', $permission['false_cap']);
+            $this->user_role->add_cap('edit_pages', $permission['false_cap']);
+            $this->user_role->add_cap('edit_posts', $permission['false_cap']);
+            $this->user_role->add_cap('edit_plugins', $permission['true_cap']);
+            $this->user_role->add_cap('edit_users', $permission['true_cap']);
+            $this->user_role->add_cap('list_users', $permission['false_cap']);
+            $this->user_role->add_cap('customize', $permission['false_cap']);
+            $this->user_role->add_cap('manage_options', $permission['false_cap']);
+            $this->user_role->add_cap('edit_theme_options', $permission['false_cap']);
+            $this->user_role->add_cap('edit_pages', $permission['false_cap']);
+            $this->user_role->add_cap('activate_plugins', $permission['false_cap']);
+            $this->user_role->add_cap('update_core', $permission['false_cap']);
+            $this->user_role->add_cap('update_themes', $permission['false_cap']);
+            $this->user_role->add_cap('manage_questions', $permission['true_cap']);
+            $this->user_role->add_cap('manage_students', $permission['true_cap']);
+            $this->user_role->add_cap('create_question', $permission['true_cap']);
+            $this->user_role->add_cap('manage_routine', $permission['true_cap']);
+
+        }
+    }
+    public function set_admin_role()
+    {
         /**
          * giving permission for this plugin to admin
          */

@@ -169,6 +169,41 @@ class Base_tab
 
         }
     }
+    /**
+     * @method is going to use in manage-teacher file at method info_table_rows & manage-students file at method info_table_rows
+     * @param int $user_id
+     * @return  this method is going to fetch department assigned to a teacher or a student
+     */
+    public function dept_select_box($user_id)
+    {
+        global $wpdb;
+        /* if the variable has data then proceed */
+        if ($this->dept_data) {
+            $table = $wpdb->prefix . 'department';
+            $this->dept_id = $wpdb->get_results("SELECT dept_name, dept_id FROM " . $table . " WHERE dept_id=" . $user_id . "");
+            /* if user id's department id matched to a existed department id then proceeed */
+            if ($this->dept_id) {
+
+                foreach ($this->dept_data as $data) {
+
+                    ?>
+                        <option
+                            value="<?php echo $data->dept_id; ?> " <?php echo $data->dept_id == $user_id ? "selected" : ""; ?> >
+                            <?php echo $data->dept_name; ?>
+                        </option>
+                     <?php
+
+                }
+            } else {
+                /* if no id matched then show rest of the department that is exists but not assigned to the user */
+                ?>
+                    <option  selected  disabled hidden>Select Department</option>
+                    <?php $this->no_data_options()?>
+                <?php
+
+            }
+        }
+    }
 
     public function select_options(int $dept_id)
     {
@@ -186,9 +221,13 @@ class Base_tab
             }
         }
     }
+    /**
+     * @method is going to use in base-tab file at method dept_select_box
+     * @return this method is going to return all the department if department exists
+     */
     public function no_data_options()
     {
-
+        /* if the variable has department data then proceed */
         if ($this->dept_data) {
             foreach ($this->dept_data as $data) {
 

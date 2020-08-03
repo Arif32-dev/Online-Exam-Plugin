@@ -24,6 +24,7 @@ class Admin_Base {
 
 
         if (ajax_action == 'ud_teacher') {
+            console.log(res);
             if (res == 'updated' || res == 'allowed') {
                 let text = (res == 'allowed' ? 'User allowed as a teacher' : 'Updated Successfully!');
                 this.output('success', text, $);
@@ -56,7 +57,7 @@ class Admin_Base {
             if (res == 'allowed' || res == 'restricted') {
                 setTimeout(() => {
                     location.reload();
-                }, 3500);
+                }, 2500);
             }
         }
 

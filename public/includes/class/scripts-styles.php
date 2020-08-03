@@ -25,6 +25,7 @@ class Scripts_styles
             'single_qus_url' => BASE_URL . 'public/includes/backend/question/single_qustion.php',
             'exam_routine_url' => BASE_URL . 'public/includes/backend/routine/create_routine.php',
             'ud_routine_url' => BASE_URL . 'public/includes/backend/routine/ud_routine.php',
+            'ud_student_url' => BASE_URL . 'public/includes/backend/student/ud_student.php',
         ]);
     }
 }
