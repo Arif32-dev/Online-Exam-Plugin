@@ -14,51 +14,17 @@ class Admin_Base {
         })
     }
     status_check(e, $, res, ajax_action) {
+        if (ajax_action == 'ud_student') {
+            this.teacher_and_std_msg(res, $, 'student', e);
+        }
         if (ajax_action == 'ud_department') {
             this.common_msg(e, res, $);
         }
-
         if (ajax_action == 'ud_routine') {
-            this.common_msg(e, res, $)
+            this.common_msg(e, res, $);
         }
-
-
         if (ajax_action == 'ud_teacher') {
-            console.log(res);
-            if (res == 'updated' || res == 'allowed') {
-                let text = (res == 'allowed' ? 'User allowed as a teacher' : 'Updated Successfully!');
-                this.output('success', text, $);
-            }
-            if (res == 'not_updated' || res == 'restricted') {
-                let text = (res == 'restricted' ? 'User restricted successfully' : 'Nothing changed to update!');
-                this.output('warning', text, $);
-            }
-            if (res == 'user_not_updated') {
-                let text = 'User not updated! Please try again';
-                this.output('warning', text, $);
-            }
-            if (res == 'empty_dept') {
-                let text = 'Please select a department';
-                this.output('error', text, $);
-            }
-            if (res == 'deleted') {
-                let text = 'Deleted Successfully!';
-                this.output('success', text, $);
-                $(e.currentTarget).parent().parent().fadeOut();
-            }
-            if (res == 'user_not_deleted') {
-                let text = 'Something went wrong in deleting teacher!';
-                this.output('error', text, $);
-            }
-            if (res == 'failed') {
-                let text = 'Something went wrong!';
-                this.output('error', text, $);
-            }
-            if (res == 'allowed' || res == 'restricted') {
-                setTimeout(() => {
-                    location.reload();
-                }, 2500);
-            }
+            this.teacher_and_std_msg(res, $, 'teacher', e);
         }
 
         if (ajax_action == 'ud_question') {
@@ -109,7 +75,42 @@ class Admin_Base {
             $(e.currentTarget).parent().parent().fadeOut();
         }
     }
-
+    teacher_and_std_msg(res, $, role, e) {
+        if (res == 'updated' || res == 'allowed') {
+            let text = (res == 'allowed' ? 'User allowed as a ' + role + '' : 'Updated Successfully!');
+            this.output('success', text, $);
+        }
+        if (res == 'not_updated' || res == 'restricted') {
+            let text = (res == 'restricted' ? 'User restricted successfully' : 'Nothing changed to update!');
+            this.output('warning', text, $);
+        }
+        if (res == 'user_not_updated') {
+            let text = 'User not updated! Please try again';
+            this.output('warning', text, $);
+        }
+        if (res == 'empty_dept') {
+            let text = 'Please select a department';
+            this.output('error', text, $);
+        }
+        if (res == 'deleted') {
+            let text = 'Deleted Successfully!';
+            this.output('success', text, $);
+            $(e.currentTarget).parent().parent().fadeOut();
+        }
+        if (res == 'user_not_deleted') {
+            let text = 'Something went wrong in deleting ' + role + '!';
+            this.output('error', text, $);
+        }
+        if (res == 'failed') {
+            let text = 'Something went wrong!';
+            this.output('error', text, $);
+        }
+        if (res == 'allowed' || res == 'restricted') {
+            setTimeout(() => {
+                location.reload();
+            }, 2500);
+        }
+    }
     output(class_text, text, $) {
         this.notification = $('.oe-notification');
         this.notification.html(`

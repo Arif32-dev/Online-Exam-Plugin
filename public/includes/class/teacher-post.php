@@ -1,13 +1,23 @@
 <?php
+
 class Teacher_post
 {
     public function __construct()
     {
+        /* wordpress initialization hook createing cpt */
         add_action('init', [$this, 'create_teacher_cpt'], 0);
+        /* when save post click then this hook will run */
         add_action('save_post', [$this, 'update_teacher'], 10, 3);
+        /* when a post is sent into trash then this hook will run */
+        add_action('wp_trash_post', [$this, 'delete_teacher']);
     }
+    /**
+     * @method is going to create cpt teacher post
+     * @return void
+     */
     public function create_teacher_cpt()
     {
+        /* the cpt teacher's labels */
         $labels = array(
             'name' => _x('Teachers', 'Post Type General Name', 'oe-exam'),
             'singular_name' => _x('teacher', 'Post Type Singular Name', 'oe-exam'),
@@ -37,6 +47,7 @@ class Teacher_post
             'items_list_navigation' => __('Teachers list navigation', 'oe-exam'),
             'filter_items_list' => __('Filter Teachers list', 'oe-exam'),
         );
+        /* the cpt teacher arguments */
         $args = array(
             'label' => __('teacher', 'oe-exam'),
             'description' => __('', 'oe-exam'),
@@ -60,13 +71,21 @@ class Teacher_post
         );
         register_post_type('teacher', $args);
     }
+
+    /**
+     * @method is going to update teacher from wp_teacher table
+     * @param init $post_ID @param object $post @param bool $update
+     * @return void
+     */
     public function update_teacher($post_ID, $post, $update)
     {
-        if ('teacher' !== $post->post_type) {
+        /* if post type isn't teacher type then return */
+        if ('teacher' != $post->post_type) {
             return;
         }
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
+        /* updating teacher from wp_teacher */
         $res = $wpdb->update(
             $table,
             [
@@ -82,19 +101,112 @@ class Teacher_post
                 '%d',
             ],
         );
+        /* if wp_teacher is updated then update from wp_users table */
         if ($res) {
             self::update_from_admin($post_ID, $post->post_title);
-        } else {
-            return;
         }
     }
 
+    /**
+     * @method is going to update teacher from wp_users table
+     * @param init $user_id @param string $name
+     * @return void
+     */
     public static function update_from_admin($user_id, $name)
     {
-        wp_update_user([
-            'ID' => $user_id,
-            'display_name' => $name,
-        ]);
+        global $wpdb;
+        $table = $wpdb->prefix . 'users';
+        $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE ID=" . $user_id . "");
+        if ($res) {
+            $wpdb->update($table,
+                [
+                    'display_name' => $name,
+                ],
+                [
+                    'ID' => $user_id,
+                ],
+                [
+                    '%s',
+                ],
+                [
+                    '%d',
+                ]
+            );
+        }
+    }
+
+    /**
+     * @method is going to delete teacher from wp_teacher table
+     * @param init $user_id
+     * @return void
+     */
+    public function delete_teacher($user_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'teacher';
+        $res = $wpdb->get_results("SELECT teacher_id FROM " . $table . " WHERE teacher_id=" . $user_id . "");
+        if ($res) {
+            $delete_res = $wpdb->delete($table,
+                [
+                    'teacher_id' => $user_id,
+                ],
+                [
+                    '%d',
+                ]
+            );
+            /* if teacher is deleted from wp_teaher table then delete user from wp_users table */
+            if ($delete_res) {
+                self::delete_user_from_admin($user_id);
+            }
+        }
+    }
+
+    /**
+     * @method is going to delete teacher from wp_users table
+     * @param init $user_id
+     * @return void
+     */
+    public static function delete_user_from_admin($user_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'users';
+        $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE ID=" . $user_id . "");
+        if ($res) {
+            $delete_res = $wpdb->delete($table,
+                [
+                    'ID' => $user_id,
+                ],
+                [
+                    '%d',
+                ]
+            );
+            /* if user is deleted from wp_users table then delete usermeta from wp_usermeta table */
+            if ($delete_res) {
+                self::delete_user_from_users_meta($user_id);
+            }
+        }
+    }
+
+    /**
+     * @method is going to delete teacher from wp_usermeta table
+     * @param init $user_id
+     * @return void
+     */
+    public static function delete_user_from_users_meta($user_id)
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'usermeta';
+        $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE user_id=" . $user_id . "");
+        if ($res) {
+            $wpdb->delete($table,
+                [
+                    'user_id' => $user_id,
+                ],
+                [
+                    '%d',
+                ]
+            );
+        }
     }
 }
 new Teacher_post();

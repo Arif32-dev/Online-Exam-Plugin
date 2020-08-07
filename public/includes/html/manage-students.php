@@ -1,3 +1,5 @@
+<div class="oe-notification">
+</div>
 <?php
 class Students extends Base_tab
 {
@@ -88,7 +90,7 @@ class Students extends Base_tab
                      <tr>
                             <td><?php echo $std->std_id ?></td>
                             <td>
-                                <input type="text" name="std_name" class="std_name" value="<?php echo $std->std_name ?>">
+                                <input type="text" name="std_name" class="std_name" value="<?php echo sanitize_text_field(trim($std->std_name)) ?>">
                             </td>
                             <td>
                             <select style="width: 10rem" class="student_dept">
@@ -96,14 +98,14 @@ class Students extends Base_tab
                             </select>
                             </td>
                             <td>
-                                <input type="text" value="<?php echo $std->std_phone ?>" />
+                                <input type="text" value="<?php echo sanitize_text_field(trim($std->std_phone)) ?>" name="std_phn"/>
                             </td>
                             <td>
                                 <?php echo $std->std_email ?>
                             </td>
                             <td><?php echo date("Y-m-d   h:i:sa", $std->std_reg_date) ?></td>
                             <td><?php echo $std->status == 1 ? "<span class='user-status user_active'>Active</span>" : "<span class='user-status user_inactive'>Inactive</span>" ?></td>
-                            <td><?php echo $std->restriction == 0 ? "<button data-time=" . time() . " data-std-id=" . $std->std_id . " data-action='restrict-student'  class='oe-restrict-student oe-red'>Restrict</button>" : "<button data-std-id=" . $std->std_id . " data-action='allow-student'  class='oe-allow-student oe-green'>Allow</button>" ?></td>
+                            <td><?php echo $std->restriction == 0 ? "<button data-time=" . time() . " data-student-id=" . $std->std_id . " data-action='restrict-student'  class='oe-restrict-student oe-red'>Restrict</button>" : "<button data-student-id=" . $std->std_id . " data-action='allow-student'  class='oe-allow-student oe-green'>Allow</button>" ?></td>
                             <td style="padding: 0 10px"><?php echo $std->restriction == 0 ? "Not restricted" : date("Y-m-d   h:i:sa", $std->restrict_date) ?></td>
                             <td><button data-student-id="<?php echo $std->std_id ?>" data-action="update-student"  class="oe-student-update oe-green">Update</button></td>
                             <td><button data-student-id="<?php echo $std->std_id ?>" data-action="delete-student"  class="oe-student-delete oe-red">Delete</button></td>

@@ -19,13 +19,12 @@ jQuery(document).ready(function($) {
             const fetch_data = {
                 action: $(e.currentTarget).attr('data-action'),
                 std_id: $(e.currentTarget).attr('data-student-id'),
-                std_name: $(e.currentTarget).parent().parent().find('input[name=teacher_name]').val(),
-                std_dept: $(e.currentTarget).parent().parent().find('.teacher_dept').val(),
-                std_phn: $(e.currentTarget).parent().parent().find('input[name=teacher_phn]').val(),
+                std_name: $(e.currentTarget).parent().parent().find('input[name=std_name]').val(),
+                std_dept: $(e.currentTarget).parent().parent().find('.student_dept').val(),
+                std_phn: $(e.currentTarget).parent().parent().find('input[name=std_phn]').val(),
                 restrict_date: $(e.currentTarget).attr('data-time'),
             }
-            console.log(fetch_data);
-            // this.ajax_req(e, $, file_url.ud_student_url, 'ud_student', fetch_data)
+            this.ajax_req(e, $, file_url.ud_student_url, 'ud_student', fetch_data)
         }
     }
     new UD_student();
