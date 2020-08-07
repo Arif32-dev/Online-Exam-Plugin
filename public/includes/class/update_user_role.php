@@ -3,16 +3,26 @@ class OE_Update_user
 {
     public function __construct()
     {
-        add_action('profile_update', [$this, 'update_teacher_role']);
-        add_action('profile_update', [$this, 'update_student_role']);
+        add_action('profile_update', [$this, 'update_user']);
     }
 
     /**
-     * @method is a callback fucntion for profile_update hook and going to update teacher
+     * @method is a callback fucntion for profile_update hook and going to update teacher and student
      * @param int $user_id
      * @return void
      */
-    public function update_teacher_role($user_id)
+    public function update_user($user_id)
+    {
+        self::update_teacher_role($user_id);
+        self::update_student_role($user_id);
+    }
+
+    /**
+     * @method is going to update teacher role
+     * @param int $user_id
+     * @return void
+     */
+    public static function update_teacher_role($user_id)
     {
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
@@ -31,11 +41,11 @@ class OE_Update_user
     }
 
     /**
-     * @method is a callback fucntion for profile_update hook and going to update teacher
+     * @method is going to update student role
      * @param int $user_id
      * @return void
      */
-    public function update_student_role($user_id)
+    public static function update_student_role($user_id)
     {
         global $wpdb;
         $table = $wpdb->prefix . 'students';
