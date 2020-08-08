@@ -20,7 +20,7 @@ class Create_tables
         $this->create_tables();
 
         $table = $wpdb->prefix . 'question_folder';
-        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `dept_id` INT(255) NOT NULL , `exam_folder_name` TEXT NOT NULL , `exam_folder_id` INT(255) NOT NULL , `quantity` INT(255) NOT NULL , `exam_time` INT(255) NOT NULL , `pass_percentage` INT(255) NOT NULL , `publish_exam` BOOLEAN NOT NULL , `published_date` INT(255) NOT NULL , `terminate_exam` BOOLEAN NOT NULL , `termination_date` INT(255) NOT NULL , `examined_by` INT(255) NOT NULL , `exam_status` TEXT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
+        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `dept_id` INT(255) NOT NULL , `exam_folder_name` TEXT NOT NULL , `exam_folder_id` INT(255) NOT NULL , `quantity` INT(255) NOT NULL , `exam_time` INT(255) NOT NULL , `remaining_time` INT(255) NOT NULL, `pass_percentage` INT(255) NOT NULL , `publish_exam` BOOLEAN NOT NULL , `published_date` INT(255) NOT NULL , `terminate_exam` BOOLEAN NOT NULL , `termination_date` INT(255) NOT NULL , `examined_by` INT(255) NOT NULL , `exam_status` TEXT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
         $this->create_tables();
 
         $table = $wpdb->prefix . 'qustions';

@@ -31,6 +31,7 @@ class Create_qustion
                 'exam_folder_id' => time(),
                 'quantity' => sanitize_text_field($this->post_data['quantity']),
                 'exam_time' => sanitize_text_field($this->post_data['est_time']),
+                'remaining_time' => 0,
                 'pass_percentage' => sanitize_text_field($this->post_data['pass_percentage']),
                 'publish_exam' => false,
                 'published_date' => 0,
@@ -42,6 +43,7 @@ class Create_qustion
             [
                 '%d',
                 '%s',
+                '%d',
                 '%d',
                 '%d',
                 '%d',
