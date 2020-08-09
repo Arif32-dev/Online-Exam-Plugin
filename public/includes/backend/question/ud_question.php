@@ -60,6 +60,8 @@ class UD_Question
                     'exam_time' => sanitize_text_field($this->post_data['exam_time']),
                     'pass_percentage' => sanitize_text_field($this->post_data['pass_percentage']),
                     'pass_percentage' => sanitize_text_field($this->post_data['pass_percentage']),
+                    'per_qus_mark' => sanitize_text_field($this->post_data['per_qus_mark']),
+                    'total_mark' => (sanitize_text_field($this->post_data['per_qus_mark']) * sanitize_text_field($this->post_data['quantity'])),
                 ],
                 [
                     'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
@@ -67,6 +69,8 @@ class UD_Question
                 [
                     '%d',
                     '%s',
+                    '%d',
+                    '%d',
                     '%d',
                     '%d',
                     '%d',

@@ -19,6 +19,7 @@ jQuery(document).ready(function($) {
                 exam_folder_id: $(e.currentTarget).attr('data-exam-folder-id'),
                 exam_folder_name: $(e.currentTarget).parent().parent().find('input[name=exam_folder_name]').val(),
                 exam_time: $(e.currentTarget).attr('data-exam-time'),
+                per_qus_mark: $(e.currentTarget).parent().parent().find('input[name=per_qus_mark]').val(),
                 dept_id: $(e.currentTarget).parent().parent().find('.question_dept_id').val(),
                 quantity: $(e.currentTarget).parent().parent().find('input[name=quantity]').val(),
                 exam_time: $(e.currentTarget).parent().parent().find('input[name=exam_time]').val(),

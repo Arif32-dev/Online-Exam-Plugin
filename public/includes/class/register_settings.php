@@ -216,6 +216,13 @@ class Settings_api
                             <input type="number" placeholder="33%" name="pass_percentage"  required />
                         </div>
                         <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="per_qus_mark">Per Qustion Mark:</label>
+                            </strong>
+                            <input type="number" placeholder="Each qustion mark" name="per_qus_mark"  required />
+                        </div>
+                        <br>
             </div>
             <?php
 

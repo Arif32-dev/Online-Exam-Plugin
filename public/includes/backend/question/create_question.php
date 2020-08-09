@@ -32,6 +32,8 @@ class Create_qustion
                 'quantity' => sanitize_text_field($this->post_data['quantity']),
                 'exam_time' => sanitize_text_field($this->post_data['est_time']),
                 'remaining_time' => 0,
+                'per_qus_mark' => sanitize_text_field($this->post_data['per_qus_mark']),
+                'total_mark' => (sanitize_text_field($this->post_data['per_qus_mark']) * sanitize_text_field($this->post_data['quantity'])),
                 'pass_percentage' => sanitize_text_field($this->post_data['pass_percentage']),
                 'publish_exam' => false,
                 'published_date' => 0,
@@ -43,6 +45,8 @@ class Create_qustion
             [
                 '%d',
                 '%s',
+                '%d',
+                '%d',
                 '%d',
                 '%d',
                 '%d',

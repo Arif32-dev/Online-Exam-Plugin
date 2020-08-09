@@ -50,6 +50,8 @@ class Question extends Base_tab
                                 <th>Exam Folder</th>
                                 <th>Quantity</th>
                                 <th>Exam's Time</th>
+                                <th>Total Mark</th>
+                                <th>Per Qus Mark</th>
                                 <th>Pass Percentage</th>
                                 <th>Publish Exam</th>
                                 <th>Terminate Exam</th>
@@ -151,6 +153,8 @@ class Question extends Base_tab
                         </td>
                         <td><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?>  style="width: 80px;" type="number" name="quantity" value="<?php echo $qus->quantity ?>"></td>
                         <td ><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="exam_time" value="<?php echo $qus->exam_time ?>"></td>
+                        <td ><?php echo $qus->total_mark ?></td>
+                        <td ><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="per_qus_mark" value="<?php echo $qus->per_qus_mark ?>" /></td>
                         <td><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="pass_percentage" value="<?php echo $qus->pass_percentage ?>" /></td>
                         <td><?php echo $qus->publish_exam == 0 ? "<button data-exam-time='" . $qus->exam_time . "' data-exam-folder-id='" . $qus->exam_folder_id . "'  data-action='oe-publish-qus' id='" . $qus->exam_folder_id . "' class='oe-publish-qus oe-green'>Publish</button>" : "<span class='user-status user_inactive'>Published</span>" ?></td>
                         <td><button data-termination_date="<?php echo time() ?>" <?php echo $qus->terminate_exam == false ? 'disabled' : "" ?> class="oe-terminate <?php echo $qus->terminate_exam == false ? 'oe-yellow' : 'ow-yellow-active' ?>">Terminate</button></td>

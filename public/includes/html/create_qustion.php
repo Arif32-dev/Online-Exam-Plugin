@@ -101,34 +101,34 @@ class OE_qustion
                             <h3>
                                 <label for="oe-qus-text">Qustion : </label>
                             </h3>
-                            <textarea value="asldfjalsfj" name="oe-qus-text"  cols="50" rows="5"></textarea>
+                            <textarea  name="oe-qus-text"  cols="50" rows="5"></textarea>
                              <div>
                                 <span>
                                     <strong>
                                         <label for="qus1">A1 </label>
                                     </strong>
-                                    <input type="text" name="qus1" value="<?php echo $res[$i - 1]->a1 ?>">
+                                    <input type="text" name="qus1">
                                     <input type="hidden" name="a1_id" value="<?php echo $i + 1 ?>">
                                 </span>
                                 <span>
                                     <strong>
                                         <label for="qus2">A2</label>
                                     </strong>
-                                    <input type="text" name="qus2" value="<?php echo $res[$i - 1]->a2 ?>" >
+                                    <input type="text" name="qus2" >
                                     <input type="hidden" name="a2_id" value="<?php echo $i + 2 ?>">
                                 </span>
                                 <span>
                                     <strong>
                                         <label for="qus3">A3</label>
                                     </strong>
-                                    <input type="text" name="qus3" value="<?php echo $res[$i - 1]->a3 ?>">
+                                    <input type="text" name="qus3">
                                     <input type="hidden" name="a3_id" value="<?php echo $i + 3 ?>">
                                 </span>
                                 <span>
                                     <strong>
                                         <label for="qus4">A4</label>
                                     </strong>
-                                    <input type="text" name="qus4" value="<?php echo $res[$i - 1]->a4 ?>">
+                                    <input type="text" name="qus4">
                                     <input type="hidden" name="a4_id" value="<?php echo $i + 4 ?>">
                                 </span>
                             </div>
