@@ -46,6 +46,7 @@ class Single_qustions
                 'a4' => sanitize_text_field($this->post_data['qus4']),
                 'a4_id' => sanitize_text_field($this->post_data['a4_id']),
                 'correct_ans' => sanitize_text_field($this->post_data['correct_ans']),
+                'status' => true,
             ],
             [
                 '%d',
@@ -58,6 +59,7 @@ class Single_qustions
                 '%s',
                 '%d',
                 '%s',
+                '%d',
                 '%d',
                 '%d',
             ]
@@ -82,6 +84,7 @@ class Single_qustions
                 'a4' => sanitize_text_field($this->post_data['qus4']),
                 'a4_id' => sanitize_text_field($this->post_data['a4_id']),
                 'correct_ans' => sanitize_text_field($this->post_data['correct_ans']),
+                'status' => true,
             ],
             [
                 'qustion_id' => sanitize_text_field($this->post_data['qustion_id']),
@@ -98,6 +101,7 @@ class Single_qustions
                 '%s',
                 '%d',
                 '%s',
+                '%d',
                 '%d',
                 '%d',
             ],

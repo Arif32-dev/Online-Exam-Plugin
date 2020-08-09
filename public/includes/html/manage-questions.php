@@ -148,20 +148,81 @@ class Question extends Base_tab
                                 <a href="<?php echo admin_url('admin.php?page=create_question&exam_folder_id=' . $qus->exam_folder_id . '') ?>">
                                     <span class='oe-folder-icon'><i class="fas fa-folder"></i></span>
                                 </a>
-                                <input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> type="text" name="exam_folder_name" value="<?php echo $qus->exam_folder_name ?>">
+                                <input
+                                    <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                    type="text"
+                                    name="exam_folder_name"
+                                    value="<?php echo $qus->exam_folder_name ?>"
+                                >
                             </div>
                         </td>
-                        <td><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?>  style="width: 80px;" type="number" name="quantity" value="<?php echo $qus->quantity ?>"></td>
-                        <td ><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="exam_time" value="<?php echo $qus->exam_time ?>"></td>
-                        <td ><?php echo $qus->total_mark ?></td>
-                        <td ><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="per_qus_mark" value="<?php echo $qus->per_qus_mark ?>" /></td>
-                        <td><input <?php echo $qus->publish_exam == true ? "disabled" : "" ?> style="width: 70px;" type="number" name="pass_percentage" value="<?php echo $qus->pass_percentage ?>" /></td>
-                        <td><?php echo $qus->publish_exam == 0 ? "<button data-exam-time='" . $qus->exam_time . "' data-exam-folder-id='" . $qus->exam_folder_id . "'  data-action='oe-publish-qus' id='" . $qus->exam_folder_id . "' class='oe-publish-qus oe-green'>Publish</button>" : "<span class='user-status user_inactive'>Published</span>" ?></td>
-                        <td><button data-termination_date="<?php echo time() ?>" <?php echo $qus->terminate_exam == false ? 'disabled' : "" ?> class="oe-terminate <?php echo $qus->terminate_exam == false ? 'oe-yellow' : 'ow-yellow-active' ?>">Terminate</button></td>
+                        <td>
+                            <input
+                                <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                style="width: 80px;"
+                                type="number"
+                                name="quantity"
+                                value="<?php echo $qus->quantity ?>"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                style="width: 70px;"
+                                type="number"
+                                name="exam_time"
+                                value="<?php echo $qus->exam_time ?>"
+                            >
+                        </td>
+                        <td><?php echo $qus->total_mark ?></td>
+                        <td>
+                            <input
+                                <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                style="width: 70px;"
+                                type="number"
+                                name="per_qus_mark"
+                                value="<?php echo $qus->per_qus_mark ?>"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                style="width: 70px;"
+                                type="number"
+                                name="pass_percentage"
+                                value="<?php echo $qus->pass_percentage ?>"
+                            >
+                        </td>
+                        <td>
+                            <?php echo $qus->publish_exam == 0 ? "<button data-exam-time='" . $qus->exam_time . "' data-exam-folder-id='" . $qus->exam_folder_id . "'  data-action='oe-publish-qus' id='" . $qus->exam_folder_id . "' class='oe-publish-qus oe-green'>Publish</button>" : "<span class='user-status user_inactive'>Published</span>" ?>
+                        </td>
+                        <td>
+                            <button
+                                data-termination_date="<?php echo time() ?>"
+                                <?php echo $qus->terminate_exam == false ? 'disabled' : "" ?>
+                                class="oe-terminate <?php echo $qus->terminate_exam == false ? 'oe-yellow' : 'ow-yellow-active' ?>">
+                                Terminate
+                            </button>
+                        </td>
                         <td><?php echo get_userdata($qus->examined_by)->data->display_name ?></td>
                         <td><span class='exam_status'><?php echo $qus->exam_status ?></span></td>
-                        <td ><button data-exam-folder-id="<?php echo $qus->exam_folder_id ?>" data-action="update-folder"  class="oe-folder-update oe-green">Update</button></td>
-                        <td><button data-exam-folder-id="<?php echo $qus->exam_folder_id ?>" data-action="delete-folder"  class="oe-folder-delete oe-red">Delete</button></td>
+                        <td>
+                            <button
+                                <?php echo $qus->publish_exam == true ? "disabled" : "" ?>
+                                data-exam-folder-id="<?php echo $qus->exam_folder_id ?>"
+                                data-action="update-folder"
+                                class="oe-folder-update oe-green <?php echo $qus->publish_exam == true ? "update_disabled" : "" ?>">
+                                Update
+                            </button>
+                        </td>
+                        <td>
+                            <button
+                            data-exam-folder-id="<?php echo $qus->exam_folder_id ?>"
+                            data-action="delete-folder"
+                            class="oe-folder-delete oe-red">
+                            Delete
+                            </button>
+                        </td>
                     </tr>
                 <?php
 

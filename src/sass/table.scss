@@ -124,6 +124,11 @@
         letter-spacing: 1px;
     }
 
+    .update_disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+    }
+
     .oe-red {
         background-color: $btn_red;
         color: white;

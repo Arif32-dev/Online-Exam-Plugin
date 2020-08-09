@@ -46,6 +46,9 @@ class Admin_Base {
                 $(e.currentTarget).parent().parent().find('input[name=quantity]').attr('disabled', true);
                 $(e.currentTarget).parent().parent().find('input[name=exam_time]').attr('disabled', true);
                 $(e.currentTarget).parent().parent().find('input[name=pass_percentage]').attr('disabled', true);
+                $(e.currentTarget).parent().parent().find('input[name=per_qus_mark]').attr('disabled', true);
+                $(e.currentTarget).parent().parent().find('.oe-folder-update').attr('disabled', true);
+                $(e.currentTarget).parent().parent().find('.oe-folder-update').addClass('update_disabled');
                 $(e.currentTarget).parent().html("<span class='user-status user_inactive'>Published</span>");
             }
             if (res == 'not_published') {

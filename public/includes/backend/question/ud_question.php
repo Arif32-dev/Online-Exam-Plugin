@@ -136,7 +136,6 @@ class UD_Question
             if ($res) {
                 $this->qustions_delete();
             }
-            $this->output($res, 'deleted', 'failed');
         } else {
             if (get_userdata(get_current_user_id())->roles[0] == 'teacher') {
                 global $wpdb;
@@ -155,7 +154,6 @@ class UD_Question
                 if ($res) {
                     $this->qustions_delete();
                 }
-                $this->output($res, 'deleted', 'failed');
             }
         }
     }
@@ -168,15 +166,49 @@ class UD_Question
     {
         global $wpdb;
         $this->table = $wpdb->prefix . 'qustions';
-        $wpdb->delete(
-            $this->table,
-            [
-                'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
-            ],
-            [
-                '%d',
-            ]
-        );
+        $qustion_exists = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . sanitize_text_field($this->post_data['exam_folder_id']) . "");
+        if ($qustion_exists) {
+
+            $res = $wpdb->delete(
+                $this->table,
+                [
+                    'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
+                ],
+                [
+                    '%d',
+                ]
+            );
+            if ($res) {
+                $this->result_delete();
+            }
+        } else {
+            $this->output(true, 'deleted', 'failed');
+        }
+    }
+
+    /**
+     * @method is going to delete all result answered by students related to its folder if folder is deleted succesfully
+     * @return void
+     */
+    public function result_delete()
+    {
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'result';
+        $result_exists = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . sanitize_text_field($this->post_data['exam_folder_id']) . "");
+        if ($result_exists) {
+            $res = $wpdb->delete(
+                $this->table,
+                [
+                    'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
+                ],
+                [
+                    '%d',
+                ]
+            );
+            $this->output($res, 'deleted', 'failed');
+        } else {
+            $this->output(true, 'deleted', 'failed');
+        }
     }
     public function publish_exam()
     {
