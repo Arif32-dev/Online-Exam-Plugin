@@ -12,10 +12,10 @@ class Question extends Base_tab
         global $wpdb;
         $this->table = $wpdb->prefix . 'question_folder';
         if (get_userdata(get_current_user_id())->roles[0] == 'teacher') {
-            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE examined_by=" . get_current_user_id() . "");
+            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE examined_by=" . get_current_user_id() . " ORDER BY exam_folder_id DESC");
         }
         if (get_userdata(get_current_user_id())->roles[0] == 'administrator') {
-            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . "");
+            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " ORDER BY exam_folder_id DESC");
         }
         $this->tab_body();
     }
@@ -199,6 +199,8 @@ class Question extends Base_tab
                         <td>
                             <button
                                 data-termination_date="<?php echo time() ?>"
+                                data-exam-folder-id="<?php echo $qus->exam_folder_id ?>"
+                                data-action="terminate-exam"
                                 <?php echo $qus->terminate_exam == false ? 'disabled' : "" ?>
                                 class="oe-terminate <?php echo $qus->terminate_exam == false ? 'oe-yellow' : 'ow-yellow-active' ?>">
                                 Terminate

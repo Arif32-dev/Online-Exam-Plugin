@@ -9,6 +9,7 @@ class Admin_Base {
             data: fetch_data,
             type: 'post',
             success: res => {
+                console.log(res)
                 this.status_check(e, $, res, ajax_action);
             }
         })
@@ -36,10 +37,23 @@ class Admin_Base {
                 let text = 'One or more field is empty';
                 this.output('warning', text, $);
             }
+            if (res == 'prev_exam_exists') {
+                let text = 'Please terminate previous exam to publish new exam';
+                this.output('warning', text, $);
+            }
+            if (res == 'terminated') {
+                let text = 'Exam terminated successfully';
+                this.output('success', text, $);
+                $(e.currentTarget).attr('disabled', true);
+                $(e.currentTarget).removeClass('ow-yellow-active');
+                $(e.currentTarget).addClass('oe-yellow');
+                $(e.currentTarget).parent().parent().find('.exam_status').html('Finished');
+            }
             if (res == 'published') {
                 let text = 'Exam published sucessfully';
                 this.output('success', text, $);
                 $(e.currentTarget).parent().parent().find('.oe-terminate').addClass('ow-yellow-active');
+                $(e.currentTarget).parent().parent().find('.oe-terminate').attr('disabled', false);
                 $(e.currentTarget).parent().parent().find('.exam_status').html('Running');
                 $(e.currentTarget).parent().parent().find('.question_dept_id').attr('disabled', true);
                 $(e.currentTarget).parent().parent().find('input[name=exam_folder_name]').attr('disabled', true);

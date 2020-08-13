@@ -10,7 +10,7 @@ class Teahers extends Base_tab
         parent::__construct("Teacher's Details", "Assign Teacher");
         global $wpdb;
         $table = $wpdb->prefix . 'teacher';
-        $this->teacher_data = $wpdb->get_results("SELECT * FROM " . $table . "");
+        $this->teacher_data = $wpdb->get_results("SELECT * FROM " . $table . " ORDER BY teacher_id DESC");
 
         $this->tab_body();
     }

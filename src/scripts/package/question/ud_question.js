@@ -6,12 +6,14 @@ jQuery(document).ready(function($) {
             this.update_btn = $('.oe-folder-update');
             this.delete_btn = $('.oe-folder-delete');
             this.publish_btn = $('.oe-publish-qus');
+            this.terminate_btn = $('.oe-terminate');
             this.events();
         }
         events() {
             this.update_btn.on('click', this.handle_req.bind(this))
             this.delete_btn.on('click', this.handle_req.bind(this))
             this.publish_btn.on('click', this.handle_req.bind(this))
+            this.terminate_btn.on('click', this.handle_req.bind(this))
         }
         handle_req(e) {
             const fetch_data = {

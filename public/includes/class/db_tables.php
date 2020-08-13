@@ -24,7 +24,7 @@ class Create_tables
         $this->create_tables();
 
         $table = $wpdb->prefix . 'qustions';
-        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `exam_folder_id` INT(255) NOT NULL , `qustion` LONGTEXT NOT NULL , `qustion_id` INT(255) NOT NULL , `a1` MEDIUMTEXT NOT NULL , `a1_id` INT(255) NOT NULL , `a2` MEDIUMTEXT NOT NULL , `a2_id` INT(255) NOT NULL , `a3` MEDIUMTEXT NOT NULL , `a3_id` INT(255) NOT NULL , `a4` MEDIUMTEXT NOT NULL , `a4_id` INT(255) NOT NULL , `correct_ans` INT(255) NOT NULL , `status` BOOLEAN NOT NULL, PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
+        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `exam_folder_id` INT(255) NOT NULL , `qustion` LONGTEXT NOT NULL , `qustion_id` INT(255) NOT NULL , `a1` MEDIUMTEXT NOT NULL , `a1_id` INT(255) NOT NULL , `a2` MEDIUMTEXT NOT NULL , `a2_id` INT(255) NOT NULL , `a3` MEDIUMTEXT NOT NULL , `a3_id` INT(255) NOT NULL , `a4` MEDIUMTEXT NOT NULL , `a4_id` INT(255) NOT NULL , `correct_ans` INT(255) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
         $this->create_tables();
 
         $table = $wpdb->prefix . 'students';

@@ -9,7 +9,7 @@ class Students extends Base_tab
         parent::__construct('Manage Students', '');
         global $wpdb;
         $table = $wpdb->prefix . 'students';
-        $this->std_data = $wpdb->get_results("SELECT * FROM " . $table . "");
+        $this->std_data = $wpdb->get_results("SELECT * FROM " . $table . " ORDER BY std_id DESC");
 
         $this->tab_body();
     }

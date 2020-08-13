@@ -11,7 +11,6 @@ class UD_Question
         $this->table = $wpdb->prefix . 'question_folder';
         if ($this->post_data['action'] == 'update-folder') {
             if ((get_userdata(get_current_user_id())->roles[0] == 'teacher') || (get_userdata(get_current_user_id())->roles[0] == 'administrator')) {
-
                 if (empty($this->post_data)) {
                     return;
                 }
@@ -19,12 +18,16 @@ class UD_Question
                     echo "empty_dept";
                     return;
                 }
-                if (!$this->post_data['exam_folder_name'] || !$this->post_data['exam_folder_id'] || !$this->post_data['quantity'] || !$this->post_data['exam_time'] || !$this->post_data['pass_percentage']) {
+                if (!$this->post_data['exam_folder_name'] ||
+                    !$this->post_data['exam_folder_id'] ||
+                    !$this->post_data['quantity'] ||
+                    !$this->post_data['exam_time'] ||
+                    !$this->post_data['pass_percentage'] ||
+                    !$this->post_data['per_qus_mark']) {
                     echo 'empty_field';
                     return;
                 }
                 $this->handle_action_update();
-
             } else {
                 echo 'invalid_authentication';
             }
@@ -37,12 +40,27 @@ class UD_Question
         }
 
         if ($this->post_data['action'] == 'oe-publish-qus') {
+            if (empty($this->post_data)) {
+                return;
+            }
             if (!$this->post_data['dept_id'] || $this->post_data['dept_id'] == null) {
                 echo "empty_dept";
                 return;
             }
+            if (!$this->post_data['exam_folder_name'] ||
+                !$this->post_data['exam_folder_id'] ||
+                !$this->post_data['quantity'] ||
+                !$this->post_data['exam_time'] ||
+                !$this->post_data['pass_percentage'] ||
+                !$this->post_data['per_qus_mark']) {
+                echo 'empty_field';
+                return;
+            }
+            $this->publish_exam();
+        }
+        if ($this->post_data['action'] == 'terminate-exam') {
             if ($this->post_data['exam_folder_id']) {
-                $this->publish_exam();
+                $this->handle_action_terminate();
             }
         }
     }
@@ -212,6 +230,10 @@ class UD_Question
     }
     public function publish_exam()
     {
+        if ($this->check_prev_published_exam()) {
+            echo 'prev_exam_exists';
+            return;
+        }
         global $wpdb;
         if (get_userdata(get_current_user_id())->roles[0] == 'administrator') {
             date_default_timezone_set(wp_timezone_string());
@@ -265,6 +287,81 @@ class UD_Question
                     ],
                 );
                 $this->output($res, 'published', 'not_published');
+            }
+        }
+    }
+    public function check_prev_published_exam()
+    {
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'question_folder';
+        $res = $wpdb->get_results("SELECT exam_folder_id FROM " . $this->table . " WHERE dept_id=" . sanitize_text_field($this->post_data['dept_id']) . " AND terminate_exam=1");
+        if ($res) {
+            return $res;
+        } else {
+            return false;
+        }
+    }
+    public function handle_action_terminate()
+    {
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'question_folder';
+
+        $check_exam_folder = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . sanitize_text_field($this->post_data['exam_folder_id']) . " AND exam_status='Running' AND terminate_exam=1");
+        if (get_userdata(get_current_user_id())->roles[0] == 'administrator') {
+            if ($check_exam_folder) {
+                $res = $wpdb->update(
+                    $this->table,
+                    [
+                        'terminate_exam' => false,
+                        'termination_date' => time(),
+                        'exam_status' => 'Finished',
+                    ],
+                    [
+                        'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
+                    ],
+                    [
+                        '%d',
+                        '%d',
+                        '%s',
+                    ],
+                    [
+                        '%d',
+                    ],
+                );
+                $this->output($res, 'terminated', 'failed');
+            } else {
+                $this->output(false, 'terminated', 'failed');
+            }
+        } else {
+            if (get_userdata(get_current_user_id())->roles[0] == 'teacher') {
+                if ($check_exam_folder) {
+                    $res = $wpdb->update(
+                        $this->table,
+                        [
+                            'terminate_exam' => false,
+                            'termination_date' => time(),
+                            'exam_status' => 'Finished',
+                        ],
+                        [
+                            'exam_folder_id' => sanitize_text_field($this->post_data['exam_folder_id']),
+                            'examined_by' => get_current_user_id(),
+                        ],
+                        [
+                            '%d',
+                            '%d',
+                            '%s',
+                        ],
+                        [
+                            '%d',
+                            '%d',
+                        ],
+                    );
+                    $this->output($res, 'terminated', 'failed');
+                } else {
+                    $this->output(false, 'terminated', 'failed');
+                }
+            } else {
+                echo 'failed';
             }
         }
     }
