@@ -92,18 +92,11 @@ class Question extends Base_tab
                                 <th>Exam Name</th>
                                 <th>Published Date</th>
                                 <th>Termination Date</th>
-                                <th>Attendant's</th>
+                                <th>Total Attendant's</th>
                                 <th>Total Registered Student</th>
                                 <th>Attendant's Performance</th>
                             </tr>
-                            <tr>
-                                <td>Jill</td>
-                                <td>Smith</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                                <td>50</td>
-                            </tr>
+                           <?php $this->tab3_rows()?>
                         </table>
                     </div>
             </div>
@@ -111,6 +104,59 @@ class Question extends Base_tab
 
     }
 
+    public function tab3_rows()
+    {
+        $qustion_folder_data = $this->qustion_folder_data();
+        if ($qustion_folder_data) {
+            date_default_timezone_set(wp_timezone_string());
+            foreach ($qustion_folder_data as $folder_data) {
+
+                ?>
+                    <tr>
+                        <td><?php echo $folder_data->exam_folder_name ?></td>
+                        <td><?php echo date("Y-m-d   h:i:sa", $folder_data->published_date) ?></td>
+                        <td><?php echo date("Y-m-d   h:i:sa", $folder_data->termination_date) ?></td>
+                        <td><?php echo $this->total_attendance($folder_data->exam_folder_id) ?></td>
+                        <td><?php echo $this->total_student() ?></td>
+                        <td>
+                            <a class="performence_icon" href="<?php echo admin_url('admin.php?page=student_performence&current_folder_id=' . $folder_data->exam_folder_id . '') ?>">
+                                <i class="fas fa-list-ul"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php
+
+            }
+        }
+    }
+    public function total_student()
+    {
+        $total_student = get_users([
+            'role__in' => ['student'],
+        ]);
+        return count($total_student);
+    }
+    public function total_attendance($exam_folder_id)
+    {
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'result';
+        $res = $wpdb->get_results("SELECT std_id FROM " . $this->table . " WHERE exam_folder_id=" . $exam_folder_id . "");
+        $arr = [];
+        if ($res) {
+            foreach ($res as $result) {
+                array_push($arr, $result->std_id);
+            }
+        }
+        $total_attendence = array_unique($arr, SORT_NUMERIC);
+        return count($total_attendence);
+    }
+    public function qustion_folder_data()
+    {
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'question_folder';
+        $res = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_status='Finished' ORDER BY exam_folder_id DESC");
+        return $res;
+    }
     public function inputs()
     {
 

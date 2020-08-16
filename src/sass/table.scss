@@ -86,6 +86,24 @@
                 -o-transition: 0.5s ease-in-out;
             }
         }
+
+        .performence_icon {
+            display: block;
+            outline: none;
+            box-shadow: none;
+            color: $primary_color;
+            font-size: 30px;
+            font-weight: bolder;
+            transition: 0.5s ease-in-out;
+            -webkit-transition: 0.5s ease-in-out;
+            -moz-transition: 0.5s ease-in-out;
+            -ms-transition: 0.5s ease-in-out;
+            -o-transition: 0.5s ease-in-out;
+
+            &:hover {
+                color: #3cc78f;
+            }
+        }
     }
 
     th,

@@ -70,6 +70,7 @@ class OE_User_role
             $this->user_role->add_cap('manage_students', $permission['true_cap']);
             $this->user_role->add_cap('create_question', $permission['true_cap']);
             $this->user_role->add_cap('manage_routine', $permission['true_cap']);
+            $this->user_role->add_cap('student_performence', $permission['true_cap']);
 
         }
     }
@@ -86,6 +87,7 @@ class OE_User_role
         $this->user_role->add_cap('manage_department', true);
         $this->user_role->add_cap('create_question', true);
         $this->user_role->add_cap('manage_routine', true);
+        $this->user_role->add_cap('student_performence', true);
 
     }
 }
