@@ -61,7 +61,7 @@ class Students extends Base_tab
 
     }
 
-    public function inputs(Type $var = null)
+    public function inputs()
     {
 
         ?>

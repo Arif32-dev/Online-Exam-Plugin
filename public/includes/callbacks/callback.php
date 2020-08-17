@@ -12,7 +12,6 @@ class Callback
         flush_rewrite_rules();
         require_once BASE_PATH . 'public/includes/class/db_tables.php';
         require_once BASE_PATH . 'public/includes/class/add_user_roles.php';
-        add_option('exam_folder_id', "");
     }
     public static function plugin_deactivation()
     {
@@ -38,10 +37,13 @@ class Callback
     {
         require_once BASE_PATH . 'public/includes/html/create_qustion.php';
     }
-
     public static function student_performence()
     {
         require_once BASE_PATH . 'public/includes/html/student_performence.php';
+    }
+    public static function individual_performence()
+    {
+        require_once BASE_PATH . 'public/includes/html/individual-performence.php';
     }
     public static function submenu_routine()
     {

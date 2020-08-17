@@ -119,7 +119,7 @@ class Question extends Base_tab
                         <td><?php echo $this->total_attendance($folder_data->exam_folder_id) ?></td>
                         <td><?php echo $this->total_student() ?></td>
                         <td>
-                            <a class="performence_icon" href="<?php echo admin_url('admin.php?page=student_performence&current_folder_id=' . $folder_data->exam_folder_id . '') ?>">
+                            <a class="performence_icon" href="<?php echo admin_url('admin.php?page=student_performence&current_folder_id=' . $folder_data->exam_folder_id . '&per_qus_mark=' . $folder_data->per_qus_mark . '&total_mark=' . $folder_data->total_mark . '&pass_percentage=' . $folder_data->pass_percentage . '') ?>">
                                 <i class="fas fa-list-ul"></i>
                             </a>
                         </td>

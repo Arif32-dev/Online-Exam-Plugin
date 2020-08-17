@@ -2,6 +2,7 @@
 <?php
 class OE_qustion
 {
+    private $exam_folder_id;
     private $qus_data;
     private $table;
     private $published_exam;
@@ -10,12 +11,15 @@ class OE_qustion
         require_once BASE_PATH . 'public/includes/html/qus_folder_subcode.php';
 
         global $wpdb;
-        if (isset($_GET['exam_folder_id'])) {
-            update_option('exam_folder_id', $_GET['exam_folder_id']);
-        }
-        if (get_option('exam_folder_id')) {
+
+        if (isset($_GET['exam_folder_id']) && $_GET['exam_folder_id'] != '') {
+            $this->exam_folder_id = sanitize_text_field(escapeshellarg($_GET['exam_folder_id']));
+
             $this->table = $wpdb->prefix . 'question_folder';
-            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . get_option('exam_folder_id') . "");
+            $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . $this->exam_folder_id . "");
+            if (!$this->qus_data) {
+                return;
+            }
             echo "<h2>Qustion_folder : " . $this->qus_data[0]->exam_folder_name . "</h2>";
             ?>
                 <div  class="oe-notification">
@@ -23,7 +27,7 @@ class OE_qustion
             <?php
 
             $qustion_folder_table = $wpdb->prefix . 'question_folder';
-            $qustion_folder_res = $wpdb->get_results("SELECT * FROM " . $qustion_folder_table . " WHERE exam_folder_id=" . get_option('exam_folder_id') . " AND publish_exam=0");
+            $qustion_folder_res = $wpdb->get_results("SELECT * FROM " . $qustion_folder_table . " WHERE exam_folder_id=" . $this->exam_folder_id . " AND publish_exam=0");
             if ($qustion_folder_res) {
                 $this->published_exam = true;
             } else {
@@ -38,7 +42,7 @@ class OE_qustion
         global $wpdb;
         $table = $wpdb->prefix . 'qustions';
         for ($i = 1; $i <= $this->qus_data[0]->quantity; $i++) {
-            $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE exam_folder_id=" . get_option('exam_folder_id') . " AND qustion_id =" . $i . "");
+            $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE exam_folder_id=" . $this->exam_folder_id . " AND qustion_id =" . $i . "");
             if ($res) {
 
                 ?>

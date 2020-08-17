@@ -141,7 +141,7 @@ class Admin_menu
         }
 
         /**
-         * adding  create all question page according to question folder
+         * adding  student performence page according to question folder
          * this is question creation page
          */
         if (isset($_GET['current_folder_id'])) {
@@ -159,6 +159,29 @@ class Admin_menu
                 // callback function
                 function () {
                     Callback::student_performence();
+                },
+            );
+        }
+
+        /**
+         * adding individual performence page according to question folder
+         * this is question creation page
+         */
+        if (isset($_GET['performence_folder_id'])) {
+            add_submenu_page(
+                // parant slug
+                'online_exam',
+                // page title
+                "" . $_GET['student_name'] . "'s Performence",
+                // menu title
+                "" . $_GET['student_name'] . "'s Performence",
+                // capability
+                'individual_performence',
+                // menu slug
+                'individual_performence',
+                // callback function
+                function () {
+                    Callback::individual_performence();
                 },
             );
         }

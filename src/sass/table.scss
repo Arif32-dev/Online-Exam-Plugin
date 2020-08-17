@@ -153,4 +153,49 @@
         padding: 3px 5px;
         letter-spacing: 1px;
     }
+
+    .pass_txt {
+        text-align: center;
+
+        span {
+            background-color: rgb(44, 224, 44);
+            padding: 5px 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+        }
+    }
+
+    .fail_txt {
+        text-align: center;
+
+        span {
+            background-color: rgba(255, 0, 0, 0.774);
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+        }
+    }
+
+    .attended,
+    .absent {
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .attended {
+        color: $primary_color;
+    }
+
+    .absent {
+        color: red;
+    }
 }
