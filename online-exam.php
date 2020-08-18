@@ -25,10 +25,7 @@
  * @plugin start here
  */
 if (!defined('ABSPATH')) {
-    die('Sorry! You are not allowed to run this plugin.');
-}
-if (version_compare(PHP_VERSION, '7.0.0') < 0) {
-    die("Sorry! You have to upgrade php version to 7.0.0 or higher.");
+    return;
 }
 if (!class_exists('OE_Initializer')) {
     return;
@@ -38,20 +35,37 @@ if (!class_exists('OE_Initializer')) {
  */
 define('BASE_PATH', plugin_dir_path(__FILE__));
 define('BASE_URL', plugin_dir_url(__FILE__));
-
+// print_r(plugin_basename(__FILE__));
 class OE_Initializer
 {
     public function __construct()
     {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        if ($this->version_check() == 'version_low') {
+            return;
+        }
         require_once BASE_PATH . 'public/includes/callbacks/callback.php';
         $this->register_active_deactive_hooks();
         $this->plugins_check();
     }
-
+    public function version_check()
+    {
+        if (version_compare(PHP_VERSION, '7.0.0') < 0) {
+            if (is_plugin_active(plugin_basename(__FILE__))) {
+                deactivate_plugins(plugin_basename(__FILE__));
+                add_action('admin_notices', [$this, 'show_notice']);
+            }
+            return 'version_low';
+        }
+    }
+    public function show_notice()
+    {
+        echo '<div class="notice notice-error is-dismissible"><h3><strong>Plugin </strong></h3><p> cannot be activated - requires at least  PHP 7.0.0 Plugin automatically deactivated.</p></div>';
+        return;
+    }
     public function plugins_check()
     {
-        require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        if (is_plugin_active('online-exam/online-exam.php')) {
+        if (is_plugin_active(plugin_basename(__FILE__))) {
             $this->including_class();
             add_filter('plugin_action_links_' . plugin_basename(__FILE__), [$this, 'add_action_links']);
         }
