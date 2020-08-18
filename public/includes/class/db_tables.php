@@ -16,7 +16,7 @@ class Create_tables
         $this->create_tables();
 
         $table = $wpdb->prefix . 'teacher';
-        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `teacher_id` INT(255) NOT NULL , `teacher_name` TEXT NOT NULL , `teacher_dept` INT(255) NOT NULL , `teacher_phn` TEXT NOT NULL , `teacher_email` TEXT NOT NULL , `appoINT(255)_date` INT(255) NOT NULL , `status` BOOLEAN NOT NULL , `restriction` BOOLEAN NOT NULL , `restrict_date` INT(255) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
+        $this->sql = "CREATE TABLE `{$db_name}`.`{$table}` ( `ID` INT(255) NOT NULL AUTO_INCREMENT , `teacher_id` INT(255) NOT NULL , `teacher_name` TEXT NOT NULL , `teacher_dept` INT(255) NOT NULL , `teacher_phn` TEXT NOT NULL , `teacher_email` TEXT NOT NULL , `appoint_date` INT(255) NOT NULL , `status` BOOLEAN NOT NULL , `restriction` BOOLEAN NOT NULL , `restrict_date` INT(255) NOT NULL , PRIMARY KEY (`ID`)) ENGINE = InnoDB $collate";
         $this->create_tables();
 
         $table = $wpdb->prefix . 'question_folder';

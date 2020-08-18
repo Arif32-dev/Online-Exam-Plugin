@@ -13,7 +13,7 @@ class OE_qustion
         global $wpdb;
 
         if (isset($_GET['exam_folder_id']) && $_GET['exam_folder_id'] != '') {
-            $this->exam_folder_id = sanitize_text_field(escapeshellarg($_GET['exam_folder_id']));
+            $this->exam_folder_id = sanitize_text_field($_GET['exam_folder_id']);
 
             $this->table = $wpdb->prefix . 'question_folder';
             $this->qus_data = $wpdb->get_results("SELECT * FROM " . $this->table . " WHERE exam_folder_id=" . $this->exam_folder_id . "");

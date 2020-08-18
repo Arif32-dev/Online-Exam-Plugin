@@ -8,8 +8,8 @@ class OE_individual_performence
     {
         if (isset($_GET['performence_folder_id']) && !empty($_GET['performence_folder_id']) &&
             isset($_GET['std_id']) && !empty($_GET['std_id'])) {
-            $this->exam_folder_id = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['performence_folder_id'])), '"'), '"');
-            $this->std_id = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['std_id'])), '"'), '"');
+            $this->exam_folder_id = rtrim(ltrim(sanitize_text_field($_GET['performence_folder_id']), '"'), '"');
+            $this->std_id = rtrim(ltrim(sanitize_text_field($_GET['std_id']), '"'), '"');
             $this->exam_folder_data = $this->qustion_folder_check($this->exam_folder_id, 'Finished');
             if ($this->exam_folder_data) {
                 if (!$this->department_data($this->exam_folder_data)) {

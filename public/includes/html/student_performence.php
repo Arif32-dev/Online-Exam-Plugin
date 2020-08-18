@@ -17,10 +17,10 @@ class OE_student_performence extends Base_tab
             isset($_GET['per_qus_mark']) && $_GET['per_qus_mark'] != '' &&
             isset($_GET['total_mark']) && $_GET['total_mark'] != '' &&
             isset($_GET['pass_percentage']) && $_GET['pass_percentage'] != '') {
-            $this->exam_folder_id = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['current_folder_id'])), '"'), '"');
-            $this->per_qus_mark = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['per_qus_mark'])), '"'), '"');
-            $this->total_mark = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['total_mark'])), '"'), '"');
-            $this->pass_percentage = rtrim(ltrim(sanitize_text_field(escapeshellarg($_GET['pass_percentage'])), '"'), '"');
+            $this->exam_folder_id = rtrim(ltrim(sanitize_text_field($_GET['current_folder_id']), '"'), '"');
+            $this->per_qus_mark = rtrim(ltrim(sanitize_text_field($_GET['per_qus_mark']), '"'), '"');
+            $this->total_mark = rtrim(ltrim(sanitize_text_field($_GET['total_mark']), '"'), '"');
+            $this->pass_percentage = rtrim(ltrim(sanitize_text_field($_GET['pass_percentage']), '"'), '"');
             global $wpdb;
             $table = $wpdb->prefix . 'students';
             $student_data = $wpdb->get_results("SELECT * FROM " . $table . " ORDER BY std_id DESC");
