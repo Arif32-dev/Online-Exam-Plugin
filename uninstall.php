@@ -77,6 +77,16 @@ class OE_uninstall
                 'parent_option_group' => 'oe-exam-routine',
                 'option_name' => 'exam_date',
             ),
+
+            /* theme setting array */
+            array(
+                'parent_option_group' => 'oe-theme-set',
+                'option_name' => 'mailer_gmail',
+            ),
+            array(
+                'parent_option_group' => 'oe-theme-set',
+                'option_name' => 'mailer_pass',
+            ),
         );
         foreach ($settings as $setting) {
             unregister_setting($setting['parent_option_group'], $setting['option_name']);

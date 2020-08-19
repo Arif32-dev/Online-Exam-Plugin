@@ -30,6 +30,22 @@ class Admin_menu
         );
 
         /**
+         * adding theme setting  menu to admin page
+         */
+
+        add_menu_page(
+            'OE Theme Setting',
+            'Theme Setting',
+            'manage_options',
+            'oe_theme_setting',
+            function () {
+                Callback::add_theme_set_menu();
+            },
+            'dashicons-admin-generic',
+            98
+        );
+
+        /**
          * adding all the submens to admin page
          * this is teacher's submenu page
          */

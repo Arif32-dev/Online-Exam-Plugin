@@ -21,6 +21,10 @@ class Callback
     {
         require_once BASE_PATH . 'public/includes/html/manage-dept.php';
     }
+    public static function add_theme_set_menu()
+    {
+        require_once BASE_PATH . 'public/includes/html/theme_setting.php';
+    }
     public static function submenu_teachers()
     {
         require_once BASE_PATH . 'public/includes/html/manage-teacher.php';
