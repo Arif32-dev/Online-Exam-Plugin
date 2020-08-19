@@ -83,7 +83,10 @@ class Students extends Base_tab
         /* if variable have student data then fetch them all */
         if ($this->std_data) {
             /* set the user selected timezone for time and date function */
-            date_default_timezone_set(wp_timezone_string());
+            $zoneList = timezone_identifiers_list();
+            if (in_array(wp_timezone_string(), $zoneList)) {
+                date_default_timezone_set(wp_timezone_string());
+            }
             foreach ($this->std_data as $std) {
 
                 ?>

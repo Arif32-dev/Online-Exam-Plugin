@@ -41,7 +41,7 @@ class Department extends Base_tab
         ?>
             <div id="tab-two-panel" class="panel">
                 <div class="wrap">
-                    <form id="department_form"action="options.php" method='POST'>
+                    <form id="department_form" action="options.php" method='POST'>
                             <?php settings_fields('department')?>
                             <?php do_settings_sections('online_exam')?>
                             <?php submit_button('Save Department');?>
@@ -54,8 +54,11 @@ class Department extends Base_tab
     public function info_table_rows()
     {
         if ($this->dept_data) {
-            foreach ($this->dept_data as $data) {
+            $zoneList = timezone_identifiers_list();
+            if (in_array(wp_timezone_string(), $zoneList)) {
                 date_default_timezone_set(wp_timezone_string());
+            }
+            foreach ($this->dept_data as $data) {
                 $last_updated;
                 if ($data->dept_last_updated != 0) {
                     $last_updated = date("Y-m-d  h:i:sa", $data->dept_last_updated);

@@ -9,9 +9,9 @@ class OE_uninstall
                 $this->delete_tables($sql);
             }
         }
-        $this->unregister_oe_settings();
+        $this->delete_options();
     }
-    public function unregister_oe_settings()
+    public function delete_options()
     {
         $settings = array(
             /* Department array */
@@ -91,6 +91,8 @@ class OE_uninstall
         foreach ($settings as $setting) {
             unregister_setting($setting['parent_option_group'], $setting['option_name']);
         }
+        delete_option('mailer_gmail');
+        delete_option('mailer_pass');
     }
     public function db_connection()
     {

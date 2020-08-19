@@ -146,7 +146,7 @@ class Settings_api
                             <strong>
                                 <label for="dept">Department Name:</label>
                             </strong>
-                            <input type="text" name="dept_name"  />
+                            <input type="text" name="dept_name" />
                         </div>
                         <input type="hidden" name="dept_create_date"  value="<?php echo time(); ?>" />
                         <input type="hidden" name="dept_author"  value="<?php echo get_current_user_id(); ?>" />

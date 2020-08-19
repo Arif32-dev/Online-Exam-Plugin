@@ -108,7 +108,10 @@ class Question extends Base_tab
     {
         $qustion_folder_data = $this->qustion_folder_data();
         if ($qustion_folder_data) {
-            date_default_timezone_set(wp_timezone_string());
+            $zoneList = timezone_identifiers_list();
+            if (in_array(wp_timezone_string(), $zoneList)) {
+                date_default_timezone_set(wp_timezone_string());
+            }
             foreach ($qustion_folder_data as $folder_data) {
 
                 ?>

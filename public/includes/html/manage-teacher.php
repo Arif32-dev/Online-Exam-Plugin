@@ -49,7 +49,7 @@ class Teahers extends Base_tab
         ?>
                 <div id="tab-two-panel" class="panel">
                         <div class="wrap">
-                                    <form id="ow_teacher_form"action="options.php" method='POST'>
+                                    <form id="ow_teacher_form" action="options.php" method='POST'>
                                             <?php settings_fields("oe-teacher")?>
                                             <?php do_settings_sections("manage_teachers")?>
                                             <?php submit_button("Save Teacher");?>
@@ -63,8 +63,10 @@ class Teahers extends Base_tab
     {
         if ($this->teacher_data) {
             foreach ($this->teacher_data as $teacher) {
-                date_default_timezone_set(wp_timezone_string());
-
+                $zoneList = timezone_identifiers_list();
+                if (in_array(wp_timezone_string(), $zoneList)) {
+                    date_default_timezone_set(wp_timezone_string());
+                }
                 ?>
                 <tr>
                         <td><?php echo $teacher->teacher_id ?></td>
