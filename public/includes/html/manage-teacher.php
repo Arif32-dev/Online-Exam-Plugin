@@ -50,7 +50,7 @@ class Teahers extends Base_tab
                 <div id="tab-two-panel" class="panel">
                         <div class="wrap">
                                     <form id="ow_teacher_form"action="options.php" method='POST'>
-                                            <?php settings_fields("ow-teacher")?>
+                                            <?php settings_fields("oe-teacher")?>
                                             <?php do_settings_sections("manage_teachers")?>
                                             <?php submit_button("Save Teacher");?>
                                     </form>

@@ -18,26 +18,26 @@ class Settings_api
         /**
          * registering Teachers and fields for Assign Teacher  tab
          */
-        register_setting('ow-teacher', 'teacher_name');
-        register_setting('ow-teacher', 'teacher_dept');
-        register_setting('ow-teacher', 'teacher_username');
-        register_setting('ow-teacher', 'teacher_email');
-        register_setting('ow-teacher', 'teacher_pass');
-        register_setting('ow-teacher', 'teacher_phn');
+        register_setting('oe-teacher', 'teacher_name');
+        register_setting('oe-teacher', 'teacher_dept');
+        register_setting('oe-teacher', 'teacher_username');
+        register_setting('oe-teacher', 'teacher_email');
+        register_setting('oe-teacher', 'teacher_pass');
+        register_setting('oe-teacher', 'teacher_phn');
         /**
          * registering Teachers and fields for Assign Teacher  tab
          */
-        register_setting('ow-question', 'exam_folder');
-        register_setting('ow-question', 'quantity');
-        register_setting('ow-question', 'est_time');
-        register_setting('ow-question', 'pass_percentage');
+        register_setting('oe-question', 'exam_folder');
+        register_setting('oe-question', 'quantity');
+        register_setting('oe-question', 'est_time');
+        register_setting('oe-question', 'pass_percentage');
 
         /**
          * registering exam routine and fields for Assign Teacher  tab
          */
-        register_setting('ow-exam-routine', 'department');
-        register_setting('ow-exam-routine', 'exam_name');
-        register_setting('ow-exam-routine', 'exam_date');
+        register_setting('oe-exam-routine', 'department');
+        register_setting('oe-exam-routine', 'exam_name');
+        register_setting('oe-exam-routine', 'exam_date');
 
         $this->settings_section();
         $this->settings_fields();

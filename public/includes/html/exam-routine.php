@@ -52,7 +52,7 @@ class Exam_routine extends Base_tab
             <div id="tab-two-panel" class="panel">
                 <div class="wrap">
                     <form id="exam-routine_form" action="options.php" method='POST'>
-                            <?php settings_fields('ow-exam-routine')?>
+                            <?php settings_fields('oe-exam-routine')?>
                             <?php do_settings_sections('manage_routine')?>
                             <?php submit_button('Save Department');?>
                     </form>

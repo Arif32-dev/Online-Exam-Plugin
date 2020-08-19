@@ -73,7 +73,7 @@ class Question extends Base_tab
                    <div id="tab-two-panel" class="panel">
                        <div class="wrap">
                             <form id="question_create_form"action="options.php" method='POST'>
-                                    <?php settings_fields("ow-question")?>
+                                    <?php settings_fields("oe-question")?>
                                     <?php do_settings_sections("manage_questions")?>
                                     <?php submit_button("Save Question");?>
                             </form>
