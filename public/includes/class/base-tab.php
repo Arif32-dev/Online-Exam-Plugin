@@ -112,6 +112,12 @@ class Base_tab
                 }
             }
 
+        } else {
+
+            ?>
+                <option value=""  selected  disabled hidden>No Department</option>
+            <?php
+
         }
 
     }
@@ -246,7 +252,7 @@ class Base_tab
         $teacher_dept = $wpdb->get_results("SELECT teacher_dept FROM " . $table . " WHERE teacher_id=" . get_current_user_id() . "");
 
         ?>
-            <select name="dept_id" required>
+            <select style="width: 10rem" name="dept_id" required>
         <?php
 
         if ($teacher_dept) {

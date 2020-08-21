@@ -28,33 +28,34 @@
             flex-basis: auto;
 
             form {
-                table {
-                    border: none;
-                }
+                .s_fields {
+                    width: 50%;
 
-                tbody {
+                    .single_field {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
 
-                    th {
-                        display: none !important;
+                        span {
+                            font-size: 20px;
+                            cursor: pointer;
+
+                            &:hover {
+                                color: $primary_color;
+                            }
+                        }
                     }
 
-                    .s_fields {
-                        width: 50%;
+                    @media screen and (max-width: 760px) {
+                        & {
+                            width: 70%
+                        }
+                    }
 
-                        .single_field {
-                            width: 100%;
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-
-                            span {
-                                font-size: 20px;
-                                cursor: pointer;
-
-                                &:hover {
-                                    color: $primary_color;
-                                }
-                            }
+                    @media screen and (max-width: 600px) {
+                        & {
+                            width: 100%
                         }
                     }
                 }
