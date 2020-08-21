@@ -246,7 +246,7 @@ class Base_tab
         $teacher_dept = $wpdb->get_results("SELECT teacher_dept FROM " . $table . " WHERE teacher_id=" . get_current_user_id() . "");
 
         ?>
-            <select name="" id=""></select>
+            <select name="dept_id" required>
         <?php
 
         if ($teacher_dept) {
@@ -254,5 +254,10 @@ class Base_tab
         } else {
             $this->admin_select_box(false, get_current_user_id());
         }
+
+        ?>
+            </select>
+        <?php
+
     }
 }

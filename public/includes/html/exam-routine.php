@@ -52,8 +52,7 @@ class Exam_routine extends Base_tab
             <div id="tab-two-panel" class="panel">
                 <div class="wrap">
                     <form id="exam-routine_form" action="options.php" method='POST'>
-                            <?php settings_fields('oe-exam-routine')?>
-                            <?php do_settings_sections('manage_routine')?>
+                            <?php $this->routine_field()?>
                             <?php submit_button('Save Department');?>
                     </form>
                 </div>
@@ -88,6 +87,35 @@ class Exam_routine extends Base_tab
             <?php
 
         }
+    }
+    public function routine_field()
+    {
+
+        ?>
+        <div class="s_fields">
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">Choose Department:</label>
+                    </strong>
+                    <?php $this->user_department_data()?>
+            </div>
+               <br>
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">For Exam :</label>
+                    </strong>
+                    <input type="text" name="exam_name" required placeholder="Upcoming exam name">
+            </div>
+               <br>
+             <div class="single_field">
+                    <strong>
+                        <label for="teacher_dept">Choose Date:</label>
+                    </strong>
+                    <input type="date" name="exam_date" required>
+            </div>
+        </div>
+        <?php
+
     }
 }
 new Exam_routine();
