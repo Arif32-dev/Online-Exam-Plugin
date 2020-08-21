@@ -72,9 +72,8 @@ class Question extends Base_tab
         ?>
                    <div id="tab-two-panel" class="panel">
                        <div class="wrap">
-                            <form id="question_create_form"action="options.php" method='POST'>
-                                    <?php settings_fields("oe-question")?>
-                                    <?php do_settings_sections("manage_questions")?>
+                            <form id="question_create_form"  method='POST'>
+                                    <?php $this->question_field()?>
                                     <?php submit_button("Save Question");?>
                             </form>
                          </div>
@@ -278,6 +277,57 @@ class Question extends Base_tab
                 <?php
 
         }
+    }
+    public function question_field()
+    {
+
+        ?>
+        <div class="s_fields">
+                        <div class="single_field">
+                            <strong>
+                                <label for="dept_id">Department:</label>
+                            </strong>
+                           <?php $this->user_department_data()?>
+                        </div>
+                        <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="exam_folder">Create Exam Folder:</label>
+                            </strong>
+                            <input style="width: 11.5rem;" type="text" name="exam_folder" placeholder="Exam Name" required/>
+                        </div>
+                        <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="quantity">Question Quantity:</label>
+                            </strong>
+                            <input type="number" placeholder="25" name="quantity" required />
+                        </div>
+                        <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="est_time">Estimated Exam Time:</label>
+                            </strong>
+                            <input type="number" placeholder="40 min" name="est_time" required />
+                        </div>
+                        <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="pass_percentage">Pass Percentage:</label>
+                            </strong>
+                            <input type="number" placeholder="33%" name="pass_percentage"  required />
+                        </div>
+                        <br>
+                        <div class="single_field">
+                            <strong>
+                                <label for="per_qus_mark">Per Qustion Mark:</label>
+                            </strong>
+                            <input type="number" placeholder="Each qustion mark" name="per_qus_mark"  required />
+                        </div>
+                        <br>
+            </div>
+            <?php
+
     }
 }
 new Question();

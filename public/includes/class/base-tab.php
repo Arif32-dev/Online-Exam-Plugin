@@ -238,4 +238,21 @@ class Base_tab
             }
         }
     }
+
+    public function user_department_data()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'teacher';
+        $teacher_dept = $wpdb->get_results("SELECT teacher_dept FROM " . $table . " WHERE teacher_id=" . get_current_user_id() . "");
+
+        ?>
+            <select name="" id=""></select>
+        <?php
+
+        if ($teacher_dept) {
+            $this->admin_select_box($teacher_dept[0]->teacher_dept, get_current_user_id());
+        } else {
+            $this->admin_select_box(false, get_current_user_id());
+        }
+    }
 }

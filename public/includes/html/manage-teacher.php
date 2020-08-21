@@ -49,10 +49,9 @@ class Teahers extends Base_tab
         ?>
                 <div id="tab-two-panel" class="panel">
                         <div class="wrap">
-                                    <form id="ow_teacher_form" action="options.php" method='POST'>
-                                            <?php settings_fields("oe-teacher")?>
-                                            <?php do_settings_sections("manage_teachers")?>
-                                            <?php submit_button("Save Teacher");?>
+                                    <form id="ow_teacher_form"  method='POST'>
+                                            <?php $this->teachers_field()?>
+                                            <?php submit_button("Save Teacher")?>
                                     </form>
                         </div>
                 </div>
@@ -91,6 +90,63 @@ class Teahers extends Base_tab
 
             }
         }
+    }
+    public function teachers_field()
+    {
+
+        ?>
+            <div class="s_fields">
+                    <div class="single_field">
+                            <strong>
+                                <label for="teacher_name">Teacher Name:</label>
+                            </strong>
+                            <input type="text" name="teacher_name" required />
+                    </div>
+                    <br>
+                    <div class="single_field">
+                            <strong>
+                                <label for="teacher_dept">Choose Department:</label>
+                            </strong>
+                            <select name="teacher_dept" required>
+                                <option  selected  disabled hidden>Select Department</option>
+                                <?php $this->no_data_options();?>
+                            </select>
+                    </div>
+                    <br>
+                    <div class="single_field">
+                            <strong>
+                                <label for="teacher_username" >Teacher Username:</label>
+                            </strong>
+                            <input type="text" name="teacher_username" required />
+                    </div>
+                    <br>
+                    <div class="single_field">
+                            <strong>
+                                <label for="teacher_email">Teacher Email:</label>
+                            </strong>
+                            <input type="email" name="teacher_email" required />
+                    </div>
+                    <br>
+                    <div class="single_field" title="IF you generate or create a password please wrtie it somewhere else to remember">
+                            <strong>
+                                <label for="teacher_pass">Teacher Login Password:</label>
+                            </strong>
+                            <div class="teacher-psw">
+                            <span><i class="fas fa-key"></i></span>
+                            <input type="text" name="teacher_pass"  required />
+                            </div>
+                    </div>
+                    <br>
+                    <div class="single_field">
+                            <strong>
+                                <label for="teacher_phn">Teacher Phone:</label>
+                            </strong>
+                            <input type="text" name="teacher_phn"  />
+                    </div>
+                    <input type="hidden" name="appoint_date"  value="<?php echo time() ?>" />
+            </div>
+            <?php
+
     }
 }
 

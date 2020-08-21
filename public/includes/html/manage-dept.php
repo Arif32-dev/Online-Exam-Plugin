@@ -41,10 +41,9 @@ class Department extends Base_tab
         ?>
             <div id="tab-two-panel" class="panel">
                 <div class="wrap">
-                    <form id="department_form" action="options.php" method='POST'>
-                            <?php settings_fields('department')?>
-                            <?php do_settings_sections('online_exam')?>
-                            <?php submit_button('Save Department');?>
+                    <form id="department_form" action="" method='POST'>
+                            <?php $this->dept_field()?>
+                            <?php submit_button('Create Department')?>
                     </form>
                 </div>
             </div>
@@ -77,6 +76,23 @@ class Department extends Base_tab
         } else {
             return '';
         }
+    }
+    public function dept_field()
+    {
+
+        ?>
+                <div class="s_fields">
+                        <div class="single_field">
+                            <strong>
+                                <label for="dept">Department Name:</label>
+                            </strong>
+                            <input type="text" name="dept_name" />
+                        </div>
+                        <input type="hidden" name="dept_create_date"  value="<?php echo time(); ?>" />
+                        <input type="hidden" name="dept_author"  value="<?php echo get_current_user_id(); ?>" />
+                  </div>
+            <?php
+
     }
 }
 new Department();
