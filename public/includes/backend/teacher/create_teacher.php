@@ -79,24 +79,11 @@ class Create_teacher
             ]
         );
         if ($res) {
-            /* if teacher is created to wp_teacher database
-            then create a teacher cpt post to wordrpesss database  with the teacher id as custom id */
-            $this->create_teacher_post();
             echo 'success';
         } else {
             echo 'failed';
         }
     }
-    private function create_teacher_post()
-    {
-        /* Create a cpt teacher post with newly created user id */
-        wp_insert_post([
-            'import_id' => $this->user_id,
-            'post_title' => sanitize_text_field($this->post_data['teacher_name']),
-            'post_type' => 'teacher',
-            'post_status' => 'publish',
-            'post_content' => "",
-        ], true);
-    }
+
 }
 new Create_teacher();

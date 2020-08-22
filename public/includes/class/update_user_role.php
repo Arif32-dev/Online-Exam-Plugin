@@ -96,41 +96,7 @@ class OE_Update_user
                 '%d',
             ],
         );
-        /* if teacher is updated from wp_teacher table then update teacher from teacher cpt */
-        if ($update_res) {
-            self::update_teacher_post($user_id);
-        }
     }
-
-    /**
-     * @method is going to update teacher from teacher cpt post type from wp_posts
-     * @param int $post_id
-     * @return void
-     */
-    public static function update_teacher_post($post_id)
-    {
-        global $wpdb;
-        $table = $wpdb->prefix . 'posts';
-        $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE ID=" . $post_id . "");
-        if ($res) {
-            $update_res = $wpdb->update(
-                $table,
-                [
-                    'post_title' => '' . get_userdata($post_id)->data->display_name . '',
-                ],
-                [
-                    'ID' => $post_id,
-                ],
-                [
-                    '%s',
-                ],
-                [
-                    '%d',
-                ],
-            );
-        }
-    }
-
     /**
      * @method is going to update student from wp_students table
      * @param bool $res  @param string $table @param int $user_id @param bool $restriction @param bool $status @param int|date $restrict_date

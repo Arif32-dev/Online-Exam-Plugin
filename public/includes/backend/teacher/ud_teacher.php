@@ -48,8 +48,6 @@ class UD_teacher
         ]);
         if (!is_int($user_id)) {
             echo 'user_not_updated';
-        } else {
-            $this->update_post($user_id);
         }
     }
     public function delete_teacher()
@@ -103,7 +101,6 @@ class UD_teacher
         );
         if ($res) {
             $this->delete_teacher();
-            $this->delete_post();
             $this->output('deleted', 'failed');
         } else {
             $this->output('failed');
@@ -177,19 +174,6 @@ class UD_teacher
         if (!is_int($user_id)) {
             echo 'user_not_allowed';
         }
-    }
-    public function update_post($user_id)
-    {
-        $arr = [
-            'ID' => $user_id,
-            'post_type' => 'teacher',
-            'post_title' => sanitize_text_field($this->post_data['teacher_name']),
-        ];
-        wp_update_post($arr, true);
-    }
-    public function delete_post()
-    {
-        wp_delete_post($this->post_data['teacher_id'], true);
     }
     public function output($msg)
     {

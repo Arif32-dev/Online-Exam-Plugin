@@ -52,6 +52,7 @@ class OE_uninstall
             $wpdb->prefix . 'qustions',
             $wpdb->prefix . 'exam_routine',
             $wpdb->prefix . 'result',
+            $wpdb->prefix . 'students',
         ];
         return $tables;
     }
