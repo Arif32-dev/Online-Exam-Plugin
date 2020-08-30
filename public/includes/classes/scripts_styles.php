@@ -1,8 +1,7 @@
 <?php
-if (!class_exists('Scripts_styles')) {
-    return;
-}
-class Scripts_styles
+namespace OE\includes\classes;
+
+class Scripts_Styles
 {
     public function __construct()
     {
@@ -30,4 +29,3 @@ class Scripts_styles
         ]);
     }
 }
-new Scripts_styles();

@@ -1,6 +1,7 @@
 <?php
+namespace OE\includes\classes;
 
-class Create_tables
+class DB_Tables
 {
     private $connection;
     private $sql;
@@ -45,4 +46,3 @@ class Create_tables
         $this->connection->query($this->sql);
     }
 }
-new Create_tables();

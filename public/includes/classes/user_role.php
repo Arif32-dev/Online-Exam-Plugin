@@ -1,5 +1,7 @@
 <?php
-class OE_User_role
+namespace OE\includes\classes;
+
+class User_Role
 {
     /**
      * @param object $permission
@@ -93,4 +95,3 @@ class OE_User_role
 
     }
 }
-new OE_User_role();

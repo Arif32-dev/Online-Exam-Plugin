@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Online Exam
  *
@@ -27,15 +28,15 @@
 if (!defined('ABSPATH')) {
     return;
 }
-if (!class_exists('OE_Initializer')) {
-    return;
-}
+
 /**
  * defining all the constant to use across the plugin
  */
 define('BASE_PATH', plugin_dir_path(__FILE__));
 define('BASE_URL', plugin_dir_url(__FILE__));
-// print_r(plugin_basename(__FILE__));
+
+require_once BASE_PATH . 'vendor/autoload.php';
+
 class OE_Initializer
 {
     public function __construct()
@@ -44,10 +45,10 @@ class OE_Initializer
         if ($this->version_check() == 'version_low') {
             return;
         }
-        require_once BASE_PATH . 'public/includes/callbacks/callback.php';
         $this->register_active_deactive_hooks();
         $this->plugins_check();
     }
+
     public function version_check()
     {
         if (version_compare(PHP_VERSION, '7.0.0') < 0) {
@@ -58,11 +59,13 @@ class OE_Initializer
             return 'version_low';
         }
     }
+
     public function show_notice()
     {
         echo '<div class="notice notice-error is-dismissible"><h3><strong>Plugin </strong></h3><p> cannot be activated - requires at least  PHP 7.0.0 Plugin automatically deactivated.</p></div>';
         return;
     }
+
     public function plugins_check()
     {
         if (is_plugin_active(plugin_basename(__FILE__))) {
@@ -70,6 +73,7 @@ class OE_Initializer
             add_filter('plugin_action_links_' . plugin_basename(__FILE__), [$this, 'add_action_links']);
         }
     }
+
     /**
      * registering activation and deactivation Hooks
      * @return void
@@ -77,25 +81,28 @@ class OE_Initializer
     public function register_active_deactive_hooks()
     {
         register_activation_hook(__FILE__, function () {
-            Callback::plugin_activation();
+            flush_rewrite_rules();
+            new \OE\includes\classes\DB_Tables;
+            new \OE\includes\classes\User_Role;
         });
         register_activation_hook(__FILE__, function () {
-            Callback::plugin_deactivation();
+            flush_rewrite_rules();
         });
     }
+
     /**
      * @requiring all the classes once
      * @return void
      */
     public function including_class()
     {
-        require_once BASE_PATH . 'public/includes/class/scripts-styles.php';
-        require_once BASE_PATH . 'public/includes/class/admin_menu.php';
-        require_once BASE_PATH . 'public/includes/class/base-tab.php';
-        require_once BASE_PATH . 'public/includes/class/register_settings.php';
-        require_once BASE_PATH . 'public/includes/class/delete_user_role.php';
-        require_once BASE_PATH . 'public/includes/class/update_user_role.php';
+
+        new \OE\includes\classes\Scripts_Styles;
+        new \OE\includes\classes\Admin_Menu;
+        new \OE\includes\classes\Delete_Role;
+        new \OE\includes\classes\Update_Role;
     }
+
     /**
      * Add plugin action links.
      * @param  array  $links List of existing plugin action links.

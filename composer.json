@@ -1,0 +1,17 @@
+{
+    "name": "user/online-exam",
+    "description": "this is a plugin for online-exam theme",
+    "type": "project",
+    "authors": [{
+        "name": "Arif32-dev",
+        "email": "dragonwarrior062@gmail.com"
+    }],
+    "require": {
+        "google/apiclient": "2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "OE\\includes\\": "public/includes/"
+        }
+    }
+}

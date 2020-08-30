@@ -1,5 +1,7 @@
 <?php
-class OE_Update_user
+namespace OE\includes\classes;
+
+class Update_Role
 {
     public function __construct()
     {
@@ -130,4 +132,3 @@ class OE_Update_user
         );
     }
 }
-new OE_Update_user();

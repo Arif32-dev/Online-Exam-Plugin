@@ -1,10 +1,17 @@
 <?php
+
+namespace OE\includes\html;
+
+use OE\includes\classes\Base_Tab;
+
 settings_errors();
+
 ?>
 <div class="oe-notification">
 </div>
 <?php
-class Department extends Base_tab
+
+class Manage_Department extends Base_Tab
 {
     public function __construct()
     {
@@ -15,39 +22,39 @@ class Department extends Base_tab
     public function tab_panel1()
     {
 
-        ?>
-            <div id="tab-one-panel" class="panel active">
-                <div style="overflow-x:auto;">
-                    <table>
-                        <tr>
-                            <th>Department Name</th>
-                            <th>Date Created</th>
-                            <th>Last Updated</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                            <th>Author</th>
-                        </tr>
-                        <?php $this->info_table_rows();?>
-                    </table>
-                </div>
+?>
+        <div id="tab-one-panel" class="panel active">
+            <div style="overflow-x:auto;">
+                <table>
+                    <tr>
+                        <th>Department Name</th>
+                        <th>Date Created</th>
+                        <th>Last Updated</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>Author</th>
+                    </tr>
+                    <?php $this->info_table_rows(); ?>
+                </table>
             </div>
-        <?php
+        </div>
+    <?php
 
     }
 
     public function tab_panel2()
     {
 
-        ?>
-            <div id="tab-two-panel" class="panel">
-                <div class="wrap">
-                    <form id="department_form" action="" method='POST'>
-                            <?php $this->dept_field()?>
-                            <?php submit_button('Create Department')?>
-                    </form>
-                </div>
+    ?>
+        <div id="tab-two-panel" class="panel">
+            <div class="wrap">
+                <form id="department_form" action="" method='POST'>
+                    <?php $this->dept_field() ?>
+                    <?php submit_button('Create Department') ?>
+                </form>
             </div>
-        <?php
+        </div>
+    <?php
 
     }
     public function info_table_rows()
@@ -58,7 +65,6 @@ class Department extends Base_tab
                 date_default_timezone_set(wp_timezone_string());
             }
             foreach ($this->dept_data as $data) {
-                $last_updated;
                 if ($data->dept_last_updated != 0) {
                     $last_updated = date("Y-m-d  h:i:sa", $data->dept_last_updated);
                 } else {
@@ -74,26 +80,24 @@ class Department extends Base_tab
                     </tr>';
             }
         } else {
-            return '';
+            return;
         }
     }
     public function dept_field()
     {
 
-        ?>
-                <div class="s_fields">
-                        <div class="single_field">
-                            <strong>
-                                <label for="dept">Department Name:</label>
-                            </strong>
-                            <input type="text" name="dept_name" />
-                        </div>
-                        <input type="hidden" name="dept_create_date"  value="<?php echo time(); ?>" />
-                        <input type="hidden" name="dept_author"  value="<?php echo get_current_user_id(); ?>" />
-                  </div>
-            <?php
+    ?>
+        <div class="s_fields">
+            <div class="single_field">
+                <strong>
+                    <label for="dept">Department Name:</label>
+                </strong>
+                <input type="text" name="dept_name" />
+            </div>
+            <input type="hidden" name="dept_create_date" value="<?php echo time(); ?>" />
+            <input type="hidden" name="dept_author" value="<?php echo get_current_user_id(); ?>" />
+        </div>
+<?php
 
     }
 }
-new Department();
-?>

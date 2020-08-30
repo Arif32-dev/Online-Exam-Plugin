@@ -1,8 +1,7 @@
 <?php
-if (!class_exists('Base_tab')) {
-    return;
-}
-class Base_tab
+namespace OE\includes\classes;
+
+class Base_Tab
 {
     protected $param1;
     protected $param2;

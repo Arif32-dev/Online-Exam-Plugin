@@ -1,11 +1,8 @@
 <?php
-/**
- * @class Admin_menu
- */
-if (!class_exists('Admin_menu')) {
-    return;
-}
-class Admin_menu
+
+namespace OE\includes\classes;
+
+class Admin_Menu
 {
     public function __construct()
     {
@@ -24,7 +21,7 @@ class Admin_menu
             'manage_department',
             'online_exam',
             function () {
-                Callback::add_admin_menu();
+                new \OE\includes\html\Manage_Department;
             },
             'dashicons-text-page',
         );
@@ -39,7 +36,7 @@ class Admin_menu
             'manage_options',
             'oe_theme_setting',
             function () {
-                Callback::add_theme_set_menu();
+                new \OE\includes\html\Theme_Setting;
             },
             'dashicons-admin-generic',
             98
@@ -63,7 +60,7 @@ class Admin_menu
             'manage_teachers',
             // callback function
             function () {
-                Callback::submenu_teachers();
+                new \OE\includes\html\Manage_Teaher;
             },
         );
 
@@ -85,7 +82,7 @@ class Admin_menu
             'manage_questions',
             // callback function
             function () {
-                Callback::submenu_questions();
+                new \OE\includes\html\Manage_Question;
             },
         );
 
@@ -107,7 +104,7 @@ class Admin_menu
             'manage_routine',
             // callback function
             function () {
-                Callback::submenu_routine();
+                new \OE\includes\html\Exam_Routine;
             },
         );
 
@@ -129,7 +126,7 @@ class Admin_menu
             'manage_students',
             // callback function
             function () {
-                Callback::submenu_students();
+                new \OE\includes\html\Manage_Student;
             },
         );
 
@@ -151,7 +148,7 @@ class Admin_menu
                 'create_question',
                 // callback function
                 function () {
-                    Callback::submenu_create_qus();
+                    new \OE\includes\html\Create_Qustion;
                 },
             );
         }
@@ -174,7 +171,7 @@ class Admin_menu
                 'student_performence',
                 // callback function
                 function () {
-                    Callback::student_performence();
+                    new \OE\includes\html\Student_Performence;
                 },
             );
         }
@@ -197,7 +194,7 @@ class Admin_menu
                 'individual_performence',
                 // callback function
                 function () {
-                    Callback::individual_performence();
+                    new \OE\includes\html\Individual_Performence;
                 },
             );
         }
@@ -216,4 +213,3 @@ class Admin_menu
         }
     }
 }
-new Admin_menu();

@@ -1,5 +1,7 @@
 <?php
-class OE_Delete_user
+namespace OE\includes\classes;
+
+class Delete_Role
 {
     public function __construct()
     {
@@ -77,4 +79,3 @@ class OE_Delete_user
 
     }
 }
-new OE_Delete_user();

@@ -1,13 +1,19 @@
 <?php
-class OE_individual_performence
+
+namespace OE\includes\html;
+
+class Individual_Performence
 {
     private $exam_folder_id;
     private $exam_folder_data;
     private $std_id;
     public function __construct()
     {
-        if (isset($_GET['performence_folder_id']) && !empty($_GET['performence_folder_id']) &&
-            isset($_GET['std_id']) && !empty($_GET['std_id'])) {
+        if (
+            isset($_GET['performence_folder_id']) &&
+            !empty($_GET['performence_folder_id']) &&
+            isset($_GET['std_id']) && !empty($_GET['std_id'])
+        ) {
             $this->exam_folder_id = rtrim(ltrim(sanitize_text_field($_GET['performence_folder_id']), '"'), '"');
             $this->std_id = rtrim(ltrim(sanitize_text_field($_GET['std_id']), '"'), '"');
             $this->exam_folder_data = $this->qustion_folder_check($this->exam_folder_id, 'Finished');
@@ -32,40 +38,37 @@ class OE_individual_performence
         }
     }
     public function exam_folder_table()
-    {
+    { ?>
+        <section class="exam_results">
+            <h1>Exam Result</h1>
+            <div class="current_result">
 
-        ?>
-            <section class="exam_results">
-                <h1>Exam Result</h1>
-                <div class="current_result">
-
-                    <div class="current_exam_info">
-                        <div class="info">
-                            <h3>Exam Name : <?php echo $this->exam_folder_data[0]->exam_folder_name ?></h3>
-                            <h3>Department : <?php echo $this->department_data($this->exam_folder_data)[0]->dept_name ?></h3>
-                        </div>
-                        <div class="total_mark">
-                            <h3>Total Mark : <?php echo $this->exam_folder_data[0]->total_mark ?></h3>
-                            <h3>Your Mark : <?php echo $this->aquired_mark($this->exam_folder_data, $this->std_id) ?></h3>
-                        </div>
+                <div class="current_exam_info">
+                    <div class="info">
+                        <h3>Exam Name : <?php echo $this->exam_folder_data[0]->exam_folder_name ?></h3>
+                        <h3>Department : <?php echo $this->department_data($this->exam_folder_data)[0]->dept_name ?></h3>
                     </div>
-
-                    <div class="result">
-                        <div class="header">
-                            <span>Qustion</span>
-                            <span>Correct Answer</span>
-                            <span>Student Answer</span>
-                            <span>Answer Status</span>
-                        </div>
-                        <div class="result_container">
-                            <?php $this->student_result($this->exam_folder_id, $this->std_id)?>
-                        </div>
+                    <div class="total_mark">
+                        <h3>Total Mark : <?php echo $this->exam_folder_data[0]->total_mark ?></h3>
+                        <h3>Student Mark : <?php echo $this->aquired_mark($this->exam_folder_data, $this->std_id) ?></h3>
                     </div>
-
                 </div>
-            </section>
-        <?php
 
+                <div class="result">
+                    <div class="header">
+                        <span>Qustion</span>
+                        <span>Correct Answer</span>
+                        <span>Student Answer</span>
+                        <span>Answer Status</span>
+                    </div>
+                    <div class="result_container">
+                        <?php $this->student_result($this->exam_folder_id, $this->std_id) ?>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    <?php
     }
     public function result_loader($result, $exam_folder_id)
     {
@@ -74,40 +77,37 @@ class OE_individual_performence
         $res = $wpdb->get_results("SELECT * FROM " . $table . " WHERE exam_folder_id=" . $exam_folder_id . " AND qustion_id=" . $result->qustion_id . "");
         if (!$res) {
             return;
-        }
+        } ?>
+        <div class="show_result">
+            <div class="title">
+                <span>Qustion :</span>
+            </div>
+            <div class="qustion">
+                <p><?php echo stripslashes(stripslashes($res[0]->qustion)) ?></p>
+            </div>
 
-        ?>
-               <div class="show_result">
-                        <div class="title">
-                            <span>Qustion :</span>
-                        </div>
-                        <div class="qustion">
-                            <p><?php echo stripslashes(stripslashes($res[0]->qustion)) ?></p>
-                        </div>
+            <div class="title">
+                <span>Correct Answer :</span>
+            </div>
+            <div class="correct_ans">
+                <p><?php echo $this->correct_ans($res) ?></p>
+            </div>
 
-                        <div class="title">
-                            <span>Correct Answer :</span>
-                        </div>
-                        <div class="correct_ans">
-                            <p><?php echo $this->correct_ans($res) ?></p>
-                        </div>
+            <div class="title">
+                <span>Student Answer :</span>
+            </div>
+            <div class="std_answer">
+                <span><?php echo $this->student_answer($result, $res) ?></span>
+            </div>
 
-                        <div class="title">
-                            <span>Student Answer :</span>
-                        </div>
-                        <div class="std_answer">
-                            <span><?php echo $this->student_answer($result, $res) ?></span>
-                        </div>
-
-                        <div class="title">
-                            <span>Answer Status :</span>
-                        </div>
-                        <div class="answer_status">
-                            <?php echo $this->answer_status($result, $res) ?>
-                        </div>
-                </div>
-        <?php
-
+            <div class="title">
+                <span>Answer Status :</span>
+            </div>
+            <div class="answer_status">
+                <?php echo $this->answer_status($result, $res) ?>
+            </div>
+        </div>
+    <?php
     }
     public function student_result($exam_folder_id, $std_id)
     {
@@ -205,19 +205,15 @@ class OE_individual_performence
         return $exam_folder_data;
     }
     public function notify_msg($text, $btn, $url)
-    {
-
-        ?>
-            <section class="oe-verifcation">
-                <div class="veri_container">
-                    <div class="ver_msg">
-                        <p><?php echo $text ?></p>
-                    </div>
-                    <a href="<?php echo $url ?>"><?php echo $btn ?></a>
+    { ?>
+        <section class="oe-verifcation">
+            <div class="veri_container">
+                <div class="ver_msg">
+                    <p><?php echo $text ?></p>
                 </div>
-            </section>
-        <?php
-
+                <a href="<?php echo $url ?>"><?php echo $btn ?></a>
+            </div>
+        </section>
+<?php
     }
 }
-new OE_individual_performence();
