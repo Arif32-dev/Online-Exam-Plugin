@@ -28,7 +28,8 @@
 if (!defined('ABSPATH')) {
     return;
 }
-
+ob_clean();
+ob_start();
 /**
  * defining all the constant to use across the plugin
  */

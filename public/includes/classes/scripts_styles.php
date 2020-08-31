@@ -1,4 +1,5 @@
 <?php
+
 namespace OE\includes\classes;
 
 class Scripts_Styles
@@ -26,6 +27,7 @@ class Scripts_Styles
             'exam_routine_url' => BASE_URL . 'public/includes/backend/routine/create_routine.php',
             'ud_routine_url' => BASE_URL . 'public/includes/backend/routine/ud_routine.php',
             'ud_student_url' => BASE_URL . 'public/includes/backend/student/ud_student.php',
+            'send_email_url' => BASE_URL . 'public/includes/backend/gmail/send_email.php',
         ]);
     }
 }
