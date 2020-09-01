@@ -71,6 +71,8 @@ class Manage_Teaher extends Base_Tab
                 $zoneList = timezone_identifiers_list();
                 if (in_array(wp_timezone_string(), $zoneList)) {
                     date_default_timezone_set(wp_timezone_string());
+                } else {
+                    date_default_timezone_set('America/Los_Angeles');
                 } ?>
 
                 <tr>

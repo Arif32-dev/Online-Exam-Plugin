@@ -14,6 +14,7 @@ class Scripts_Styles
         wp_enqueue_style('oe-table_style', BASE_URL . 'public/assets/css/table.min.css');
         wp_enqueue_style('oe-qustion', BASE_URL . 'public/assets/css/qustion.min.css');
         wp_enqueue_style('oe-individual', BASE_URL . 'public/assets/css/individual_result.min.css');
+        wp_enqueue_style('oe-theme_setting', BASE_URL . 'public/assets/css/theme_setting.min.css');
         wp_enqueue_script('oe_admin_scirpt', BASE_URL . 'public/assets/scripts/admin.min.js', 'jquery', '1.0.0', true);
         wp_enqueue_script('oe_admin_fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js', '', '', true);
         wp_localize_script('oe_admin_scirpt', 'file_url', [

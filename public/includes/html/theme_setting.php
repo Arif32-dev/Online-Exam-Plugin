@@ -5,42 +5,6 @@ namespace OE\includes\html;
 ?>
 <div class="oe-notification">
 </div>
-
-<style>
-    table th {
-        display: none
-    }
-
-    h4 {
-        color: green;
-    }
-
-    .url {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-    }
-
-    #oe_set_page_url {
-        width: 70%;
-    }
-
-    @media screen and (max-width: 800px) {
-        .url {
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
-
-        #oe_copy_url {
-            margin-top: 10px;
-        }
-
-        #oe_set_page_url {
-            width: 95%;
-        }
-    }
-</style>
 <script>
     function copyText(e) {
         const input = document.getElementById('oe_set_page_url');
@@ -50,6 +14,7 @@ namespace OE\includes\html;
         input.setSelectionRange(0, 99999)
         document.execCommand("copy");
         btn.innerText = "Copied"
+        btn.classList.add('copied')
     }
 </script>
 <?php
@@ -65,7 +30,7 @@ class Theme_Setting
 
     public function render_html()
     { ?>
-        <h3>Online Exam theme uses Gmail Api to send email <br><br>
+        <h3 id="theme_setting_header">Online Exam theme uses Gmail Api to send email <br><br>
             <div class="url">
                 <input width="80px" type="text" value="<?php echo $this->page_url() ?>" id="oe_set_page_url">
                 <button id="oe_copy_url" onclick="copyText()">Copy URL</button>
@@ -78,12 +43,14 @@ class Theme_Setting
         </h3>
         <div class="wrap">
             <form id="gmail_json" action="" method='POST' enctype="multipart/form-data">
-                <input type="file" name="json_file">
+                <label for="json_file" id="file_label">Choose JSON File</label>
+                <input type="file" name="json_file" id="json_file">
                 <input type="submit" name="submit" value="Upload JSON" />
             </form>
         </div>
         <?php echo $this->auth_btn() ?>
         <?php $this->test_msg_field() ?>
+        <?php $this->set_theme_timezone() ?>
         <?php
     }
     public function page_url()
@@ -164,14 +131,16 @@ class Theme_Setting
             if (get_option('access_token')) {
 
                 $msg = "Verified";
+                $class = "verified";
             } else {
                 $msg = "Authorize Gmail Account";
+                $class = "invalid";
             }
-            return '<h3>
-                            <a href="' . $this->get_auth_url() . '" target="_blank" id="oe_auth">
+            return '<h3 id="oe_auth_wrap">
+                            <a class="' . $class . '" href="' . $this->get_auth_url() . '" target="_blank" >
                                 ' . $msg . '
                             </a>
-                    </h3>';
+                        </h3>';
         }
     }
     public function test_msg_field()
@@ -179,9 +148,9 @@ class Theme_Setting
         if (get_option('access_token')) { ?>
             <form id="oe_gmail_test">
                 <input type="email" value="<?php echo get_option('admin_email') ?>" name="target_email">
-                <input type="submit" value="Send Test Messege" id="">
+                <input type="submit" value="Send Test Messege">
             </form>
-<?php
+        <?php
         }
     }
     public function get_auth_url()
@@ -195,5 +164,11 @@ class Theme_Setting
         $client->setPrompt('select_account consent');
         $authUrl = $client->createAuthUrl();
         return $authUrl;
+    }
+    public function set_theme_timezone()
+    { ?>
+        <br>
+        <a id="theme_time_zone" href="<?php echo admin_url('options-general.php') ?>">Set Theme Timezone</a>
+<?php
     }
 }

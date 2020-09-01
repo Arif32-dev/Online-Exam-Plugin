@@ -1,0 +1,125 @@
+@import './package/variables.scss';
+
+#theme_setting_header {
+    background-color: white;
+    padding: 20px;
+
+    .url {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+
+        input {
+            width: 70%;
+            margin-right: 5px;
+        }
+
+        button {
+            outline: none;
+            border: none;
+            background-color: $primary_color;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        .copied {
+            background-color: $btn_green;
+            color: black;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .url {
+            flex-direction: column;
+
+            input {
+                margin-bottom: 5px;
+                width: 95%;
+            }
+
+            align-items: flex-start;
+        }
+    }
+}
+
+#gmail_json {
+    input {
+        background-color: $primary_color;
+        color: white;
+        outline: none;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    #json_file {
+        overflow: hidden;
+        display: none;
+    }
+
+    #file_label {
+        background-color: $btn_green;
+        color: black;
+        padding: 6px 10px;
+        margin-right: 20px;
+    }
+}
+
+#oe_auth_wrap {
+    margin-top: 30px;
+
+
+    a {
+        text-decoration: none;
+        color: white;
+        outline: none;
+        border: none;
+        box-shadow: none;
+        padding: 6px 15px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+    }
+
+    .invalid {
+        background-color: $btn_orange;
+    }
+
+    .verified {
+        background-color: $btn_green;
+    }
+}
+
+
+
+#oe_gmail_test {
+    input[type=submit] {
+        background-color: $primary_color;
+        color: white;
+        outline: none;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    input[type=email] {
+        width: 250px;
+        margin: 10px 0;
+    }
+}
+
+#theme_time_zone {
+    background-color: $primary_color;
+    color: white;
+    outline: none;
+    padding: 7px 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}

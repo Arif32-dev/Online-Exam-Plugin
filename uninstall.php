@@ -13,22 +13,10 @@ class OE_uninstall
     }
     public function delete_options()
     {
-        $settings = array(
-            /* theme setting array */
-            array(
-                'parent_option_group' => 'oe-theme-set',
-                'option_name' => 'mailer_gmail',
-            ),
-            array(
-                'parent_option_group' => 'oe-theme-set',
-                'option_name' => 'mailer_pass',
-            ),
-        );
-        foreach ($settings as $setting) {
-            unregister_setting($setting['parent_option_group'], $setting['option_name']);
-        }
         delete_option('mailer_gmail');
         delete_option('mailer_pass');
+        delete_option('access_token');
+        delete_option('credentials');
     }
     public function db_connection()
     {
