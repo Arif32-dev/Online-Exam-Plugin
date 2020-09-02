@@ -13,8 +13,6 @@ class OE_uninstall
     }
     public function delete_options()
     {
-        delete_option('mailer_gmail');
-        delete_option('mailer_pass');
         delete_option('access_token');
         delete_option('credentials');
     }
