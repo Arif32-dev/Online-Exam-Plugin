@@ -13,5 +13,13 @@
         "psr-4": {
             "OE\\includes\\": "public/includes/"
         }
+    },
+    "scripts": {
+        "post-update-cmd": "Google_Task_Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "Gmail"
+        ]
     }
 }
